@@ -1,239 +1,142 @@
 #!/usr/bin/env python3
 
-import json
-import re
-import sys
+import json, re, sys
 from pathlib import Path
-from typing import Dict, Any, Optional
 
+# --- Minimal, focused Python runner ---
 
-class TestResult:
-    def __init__(self, passed: bool, message: str = ""):
-        self.passed = passed
-        self.message = message
+def translate_pattern(p: str) -> str:
+    prev = None
+    while p != prev:
+        prev = p
+        def uni(m):
+            code = m.group(1)
+            return f"\\u{code.zfill(4)}" if len(code) <= 4 else f"\\U{code.zfill(8)}"
+        p = re.sub(r"@\[unicode:([0-9A-Fa-f]{4,6})\]", uni, p)
+        p = re.sub(r"@\[hex:([0-9A-Fa-f]{2})\]", r"\\x\1", p)
+        p = re.sub(r"@\[octal:([0-7]{1,3})\]", r"\\\1", p)
+        p = re.sub(r"@\[control:([A-Z])\]", lambda m: chr(ord(m.group(1)) - 64), p)
+        p = re.sub(r"@\[named:(\w+),(.+?)\]", r"(?P<\1>\2)", p)
+        p = re.sub(r"@\[backref:(\w+)\]", r"(?P=\1)", p)
+    return p
 
+def translate_data(s: str) -> str:
+    prev = None
+    while s != prev:
+        prev = s
+        s = re.sub(r"@\[unicode:([0-9A-Fa-f]{4,6})\]", lambda m: chr(int(m.group(1), 16)), s)
+        s = re.sub(r"@\[hex:([0-9A-Fa-f]{2})\]", lambda m: chr(int(m.group(1), 16)), s)
+        s = re.sub(r"@\[octal:([0-7]{1,3})\]", lambda m: chr(int(m.group(1), 8)), s)
+        s = re.sub(r"@\[control:([A-Z])\]", lambda m: chr(ord(m.group(1)) - 64), s)
+    return s
 
-class RegexTestRunner:
-    def __init__(self):
-        self.total_tests = 0
-        self.passed_tests = 0
-        self.failed_tests = 0
-        self.skipped_tests = 0
+def compile_re(p: str, flags: str):
+    try:
+        p = translate_pattern(p)
+        f = 0
+        f |= re.IGNORECASE if 'i' in flags else 0
+        f |= re.MULTILINE if 'm' in flags else 0
+        f |= re.DOTALL if 's' in flags else 0
+        f |= re.VERBOSE if 'x' in flags else 0
+        f |= re.UNICODE if 'u' in flags else 0
+        return re.compile(p, f)
+    except re.error:
+        return None
 
-    def compile_pattern(self, pattern: str, flags: str) -> Optional[re.Pattern]:
-        try:
-            flag_value = 0
-            if "i" in flags:
-                flag_value |= re.IGNORECASE
-            if "m" in flags:
-                flag_value |= re.MULTILINE
-            if "s" in flags:
-                flag_value |= re.DOTALL
-            if "x" in flags:
-                flag_value |= re.VERBOSE
-            if "u" in flags:
-                flag_value |= re.UNICODE
+def exec_all(rx, input_s: str, is_global: bool):
+    return list(rx.finditer(input_s)) if is_global else ([m] if (m := rx.search(input_s)) else [])
 
-            return re.compile(pattern, flag_value)
-        except re.error as e:
-            return None
+def compare(m, exp):
+    if m.start() != exp['start']: return f"Start mismatch: expected {exp['start']}, got {m.start()}"
+    if m.end() != exp['end']: return f"End mismatch: expected {exp['end']}, got {m.end()}"
+    if m.group(0) != exp['match']: return f"Text mismatch: expected '{exp['match']}', got '{m.group(0)}'"
+    if 'groups' in exp:
+        ag = list(m.groups()); eg = exp['groups']
+        if len(ag) != len(eg): return f"Group count mismatch: expected {len(eg)}, got {len(ag)}"
+        for i, (e, a) in enumerate(zip(eg, ag)):
+            if e != a: return f"Group {i+1} mismatch: expected '{e}', got '{a}'"
+    return None
 
-    def find_matches(
-        self, pattern: re.Pattern, input_str: str, global_flag: bool = False
-    ):
-        if global_flag:
-            return list(pattern.finditer(input_str))
-        else:
-            match = pattern.search(input_str)
-            return [match] if match else []
+def run_case(case_def, test, stats):
+    stats['total'] += 1
+    rx = compile_re(case_def.get('pattern', ''), case_def.get('flags', ''))
+    input_s = translate_data(test['input'])
+    expected = [{ **m, 'match': translate_data(m['match']) } for m in test['matches']]
+    if rx is None:
+        if not expected: stats['passed'] += 1; return
+        stats['failed'] += 1; raise RuntimeError('Failed to compile pattern')
+    matches = exec_all(rx, input_s, 'g' in (case_def.get('flags', '')))
+    if len(matches) != len(expected): stats['failed'] += 1; raise RuntimeError(f"Match count mismatch: expected {len(expected)}, got {len(matches)}")
+    for i, (m, e) in enumerate(zip(matches, expected)):
+        err = compare(m, e)
+        if err: stats['failed'] += 1; raise RuntimeError(f"Match {i}: {err}")
+    stats['passed'] += 1
 
-    def compare_match(self, actual: re.Match, expected: Dict[str, Any]) -> TestResult:
-        if actual.start() != expected["start"]:
-            return TestResult(
-                False,
-                f"Start position mismatch: expected {expected['start']}, got {actual.start()}",
-            )
+def run_file(file_path: Path, stats, verbose=False) -> bool:
+    cases = json.loads(Path(file_path).read_text(encoding='utf-8'))
+    ok = True
+    for c in cases:
+        for t in c['tests']:
+            try:
+                run_case(c, t, stats)
+                if verbose: print(f"    OK {t['description']}")
+            except Exception as e:
+                ok = False
+                if verbose: print(f"    FAILED {t['description']}\n      {e}")
+    return ok
 
-        if actual.end() != expected["end"]:
-            return TestResult(
-                False,
-                f"End position mismatch: expected {expected['end']}, got {actual.end()}",
-            )
-
-        if actual.group(0) != expected["match"]:
-            return TestResult(
-                False,
-                f"Match text mismatch: expected '{expected['match']}', got '{actual.group(0)}'",
-            )
-
-        if "groups" in expected:
-            expected_groups = expected["groups"]
-            actual_groups = list(actual.groups())
-
-            if len(actual_groups) != len(expected_groups):
-                return TestResult(
-                    False,
-                    f"Group count mismatch: expected {len(expected_groups)}, got {len(actual_groups)}",
-                )
-
-            for i, (exp_group, act_group) in enumerate(
-                zip(expected_groups, actual_groups)
-            ):
-                if exp_group != act_group:
-                    return TestResult(
-                        False,
-                        f"Group {i + 1} mismatch: expected '{exp_group}', got '{act_group}'",
-                    )
-
-        return TestResult(True)
-
-    def run_test(self, test_case: Dict[str, Any], test: Dict[str, Any]) -> TestResult:
-        self.total_tests += 1
-
-        pattern_str = test_case["pattern"]
-        flags = test_case.get("flags", "")
-        input_str = test["input"]
-        expected_matches = test["matches"]
-
-        pattern = self.compile_pattern(pattern_str, flags)
-        if pattern is None:
-            if len(expected_matches) == 0:
-                self.passed_tests += 1
-                return TestResult(True, "Invalid pattern correctly rejected")
-            else:
-                self.failed_tests += 1
-                return TestResult(False, "Failed to compile pattern")
-
-        global_flag = "g" in flags
-        actual_matches = self.find_matches(pattern, input_str, global_flag)
-
-        if len(actual_matches) != len(expected_matches):
-            self.failed_tests += 1
-            return TestResult(
-                False,
-                f"Match count mismatch: expected {len(expected_matches)}, got {len(actual_matches)}",
-            )
-
-        for i, (actual, expected) in enumerate(zip(actual_matches, expected_matches)):
-            result = self.compare_match(actual, expected)
-            if not result.passed:
-                self.failed_tests += 1
-                return TestResult(False, f"Match {i}: {result.message}")
-
-        self.passed_tests += 1
-        return TestResult(True)
-
-    def run_test_file(self, file_path: Path, verbose: bool = False) -> bool:
-        with open(file_path, "r", encoding="utf-8") as f:
-            test_cases = json.load(f)
-
-        file_passed = True
-
-        for test_case in test_cases:
-            if verbose:
-                print(f"  {test_case['description']}")
-
-            for test in test_case["tests"]:
-                result = self.run_test(test_case, test)
-
-                if verbose:
-                    status = "OK" if result.passed else "FAILED"
-                    print(f"    {status} {test['description']}")
-                    if not result.passed:
-                        print(f"      {result.message}")
-
-                if not result.passed:
-                    file_passed = False
-
-        return file_passed
-
-    def run_suite(self, tests_dir: Path, verbose: bool = False):
-        test_files = sorted(tests_dir.rglob("*.json"))
-
-        print("Running Regex Test Suite")
-        print(f"Found {len(test_files)} test files")
-        print()
-
-        passed_files = 0
-        failed_files = 0
-
-        for test_file in test_files:
-            relative_path = test_file.relative_to(tests_dir.parent)
-            print(f"{relative_path}")
-
-            file_passed = self.run_test_file(test_file, verbose)
-
-            if file_passed:
-                passed_files += 1
-                if not verbose:
-                    print("All tests passed")
-            else:
-                failed_files += 1
-                if not verbose:
-                    print("Some tests failed")
-
-            print()
-
-        print(f"Total Tests: {self.total_tests}")
-        print(
-            f"Passed: {self.passed_tests} ({100 * self.passed_tests / self.total_tests:.1f}%)"
-        )
-        print(f"Failed: {self.failed_tests}")
-        print(f"Files: {passed_files}/{len(test_files)} passed")
-
-        return self.failed_tests == 0
-
+def find_json(dir_path: Path):
+    return sorted(dir_path.rglob('*.json'))
 
 def main():
     import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('-v', '--verbose', action='store_true')
+    ap.add_argument('-f', '--file', type=str)
+    args = ap.parse_args()
 
-    parser = argparse.ArgumentParser(description="Run the Regex Test Suite")
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        action="store_true",
-        help="Show detailed output for each test",
-    )
-    parser.add_argument("-f", "--file", type=str, help="Run tests from a specific file")
-
-    args = parser.parse_args()
-
-    # Get paths
-    script_dir = Path(__file__).parent
-    repo_root = script_dir.parent
-    tests_dir = repo_root / "tests"
-
+    repo_root = Path(__file__).parent.parent
+    tests_dir = repo_root / 'tests'
     if not tests_dir.exists():
         print(f"Error: Tests directory not found: {tests_dir}")
         return 1
 
-    runner = RegexTestRunner()
+    stats = { 'total': 0, 'passed': 0, 'failed': 0 }
 
     if args.file:
-        # Run single file
         test_file = repo_root / args.file
         if not test_file.exists():
             print(f"Error: File not found: {test_file}")
             return 1
-
         print(f"Running tests from {test_file.name}")
-        print("=" * 70)
+        print('=' * 70)
+        ok = run_file(test_file, stats, True)
+        print('\n' + '=' * 70)
+        print(f"Total: {stats['total']} tests")
+        print(f"Passed: {stats['passed']}")
+        print(f"Failed: {stats['failed']}")
+        return 0 if ok else 1
+
+    files = find_json(tests_dir)
+    print('Running Regex Test Suite')
+    print(f"Found {len(files)} test files\n")
+    files_ok = 0
+    for f in files:
+        rel = f.relative_to(tests_dir.parent)
+        print(rel)
+        ok = run_file(f, stats, args.verbose)
+        if ok:
+            files_ok += 1
+            if not args.verbose: print('All tests passed')
+        else:
+            if not args.verbose: print('Some tests failed')
         print()
+    print(f"Total Tests: {stats['total']}")
+    pct = (100 * stats['passed'] / stats['total']) if stats['total'] else 0
+    print(f"Passed: {stats['passed']} ({pct:.1f}%)")
+    print(f"Failed: {stats['failed']}")
+    print(f"Files: {files_ok}/{len(files)} passed")
+    return 0 if stats['failed'] == 0 else 1
 
-        success = runner.run_test_file(test_file, verbose=True)
-
-        print()
-        print("=" * 70)
-        print(f"Total: {runner.total_tests} tests")
-        print(f"Passed: {runner.passed_tests}")
-        print(f"Failed: {runner.failed_tests}")
-
-        return 0 if success else 1
-    else:
-        # Run full suite
-        success = runner.run_suite(tests_dir, verbose=args.verbose)
-        return 0 if success else 1
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     sys.exit(main())

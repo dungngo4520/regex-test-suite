@@ -1,46 +1,53 @@
 # Regex Test Suite
 
-Test Suite for regex engines.
+Regex test suite.
 
-Usage
+## Usage
 
 ```bash
-python3 bin/validate_suite.py            # check JSON tests
-python3 bin/run_tests.py                 # run all tests
-python3 bin/run_tests.py -f <path>.json  # run one file
+# Validate test files
+python3 bin/validate_suite.py
+
+# Run tests
+node bin/run_tests.js tests               # JavaScript
+perl bin/run_tests.pl tests               # Perl
+python3 bin/run_tests.py tests            # Python
 ```
 
-Customize
+## Annotations
 
-- Add new `.json` files under `tests/` following the existing format.
-- Extend `bin/run_tests.py` for other engines or flag semantics.
+Annotations used in patterns:
 
-License
+| Annotation | Description |
+|------------|-------------|
+| `@[unicode:XXXX]` | Unicode character by hex code point |
+| `@[hex:XX]` | Character by hexadecimal value |
+| `@[octal:NNN]` | Character by octal value |
+| `@[control:X]` | Control character |
+| `@[named:name,pattern]` | Named capture group |
+| `@[backref:name]` | Backreference to named group |
 
-MIT
-
-Example
+## Test Format
 
 ```json
 [
- {
-  "description": "Simple literal",
-  "pattern": "hello",
-  "flags": "",
-  "tests": [
-   {
-    "description": "exact match",
-    "input": "hello",
-    "matches": [
-     { "start": 0, "end": 5, "match": "hello", "groups": [] }
+  {
+    "description": "Unicode space",
+    "pattern": "@[unicode:00A0]+",
+    "flags": "u",
+    "tests": [
+      {
+        "description": "match non-breaking space",
+        "input": "\u00A0",
+        "matches": [
+          { "start": 0, "end": 1, "match": "\u00A0", "groups": [] }
+        ]
+      }
     ]
-   },
-   {
-    "description": "no match",
-    "input": "world",
-    "matches": []
-   }
-  ]
- }
+  }
 ]
 ```
+
+## License
+
+MIT

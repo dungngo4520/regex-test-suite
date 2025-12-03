@@ -77,7 +77,7 @@
     },
     {
         "description": "Null byte in pattern",
-        "pattern": "hello\\x00world",
+        "pattern": "hello@[hex:00]world",
         "flags": "",
         "tests": [
             {

@@ -1,7 +1,7 @@
 [
     {
         "description": "Named capturing group (?<name>...)",
-        "pattern": "(?<user>\\w+)@(?<domain>\\w+)",
+        "pattern": "@[named:user,\\w+]@@[named:domain,\\w+]",
         "flags": "",
         "tests": [
             {
@@ -27,7 +27,7 @@
     },
     {
         "description": "Named backreference \\k<name>",
-        "pattern": "(?<word>\\w+)\\s+\\k<word>",
+        "pattern": "@[named:word,\\w+]\\s+@[backref:word]",
         "flags": "",
         "tests": [
             {
@@ -56,7 +56,7 @@
     },
     {
         "description": "Named group with alternation",
-        "pattern": "(?<proto>https?|ftp)://(?<host>\\w+)",
+        "pattern": "@[named:proto,https?|ftp]://@[named:host,\\w+]",
         "flags": "",
         "tests": [
             {
@@ -120,7 +120,7 @@
     },
     {
         "description": "Multiple named groups",
-        "pattern": "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})",
+        "pattern": "@[named:year,\\d{4}]-@[named:month,\\d{2}]-@[named:day,\\d{2}]",
         "flags": "",
         "tests": [
             {
@@ -148,7 +148,7 @@
     },
     {
         "description": "Nested named groups",
-        "pattern": "(?<full>(?<first>\\w+)\\s+(?<last>\\w+))",
+        "pattern": "@[named:full,@[named:first,\\w+]\\s+@[named:last,\\w+]]",
         "flags": "",
         "tests": [
             {

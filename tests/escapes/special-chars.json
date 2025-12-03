@@ -77,7 +77,7 @@
     },
     {
         "description": "Hex escape \\x",
-        "pattern": "\\x41",
+        "pattern": "@[hex:41]",
         "flags": "",
         "tests": [
             {
@@ -96,7 +96,7 @@
     },
     {
         "description": "Unicode escape \\u",
-        "pattern": "\\u0041",
+        "pattern": "@[unicode:0041]",
         "flags": "",
         "tests": [
             {
@@ -115,7 +115,7 @@
     },
     {
         "description": "Control character escape",
-        "pattern": "\\cA",
+        "pattern": "@[control:A]",
         "flags": "",
         "tests": [
             {

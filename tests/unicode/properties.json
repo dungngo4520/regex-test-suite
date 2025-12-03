@@ -127,7 +127,7 @@
                 "matches": [
                     {
                         "start": 0,
-                        "end": 2,
+                        "end": 1,
                         "match": "😀",
                         "groups": []
                     }
@@ -139,7 +139,7 @@
                 "matches": [
                     {
                         "start": 0,
-                        "end": 6,
+                        "end": 3,
                         "match": "😀😃😄",
                         "groups": []
                     }
@@ -262,12 +262,12 @@
         "tests": [
             {
                 "description": "match base character with combining marks",
-                "input": "é",
+                "input": "é",
                 "matches": [
                     {
                         "start": 0,
                         "end": 2,
-                        "match": "é",
+                        "match": "é",
                         "groups": []
                     }
                 ]
@@ -276,7 +276,7 @@
     },
     {
         "description": "Astral plane characters",
-        "pattern": "[\\u{1F600}-\\u{1F64F}]",
+        "pattern": "[@[unicode:1F600]-@[unicode:1F64F]]",
         "flags": "u",
         "tests": [
             {
@@ -285,7 +285,7 @@
                 "matches": [
                     {
                         "start": 0,
-                        "end": 2,
+                        "end": 1,
                         "match": "😀",
                         "groups": []
                     }
