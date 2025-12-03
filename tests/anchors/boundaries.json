@@ -1,0 +1,369 @@
+[
+    {
+        "description": "Start of string anchor ^",
+        "pattern": "^hello",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match at start",
+                "input": "hello world",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - not at start",
+                "input": "say hello",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "End of string anchor $",
+        "pattern": "world$",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match at end",
+                "input": "hello world",
+                "matches": [
+                    {
+                        "start": 6,
+                        "end": 11,
+                        "match": "world",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - not at end",
+                "input": "world hello",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Both anchors - exact match",
+        "pattern": "^hello$",
+        "flags": "",
+        "tests": [
+            {
+                "description": "exact match",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - extra at start",
+                "input": "say hello",
+                "matches": []
+            },
+            {
+                "description": "no match - extra at end",
+                "input": "hello world",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Multiline mode - ^ matches line start",
+        "pattern": "^hello",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match at string start",
+                "input": "hello\nworld",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match after newline",
+                "input": "world\nhello",
+                "matches": [
+                    {
+                        "start": 6,
+                        "end": 11,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiline mode - $ matches line end",
+        "pattern": "world$",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match at string end",
+                "input": "hello\nworld",
+                "matches": [
+                    {
+                        "start": 6,
+                        "end": 11,
+                        "match": "world",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match before newline",
+                "input": "world\nhello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "world",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Word boundary \\b - start of word",
+        "pattern": "\\bhello",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match at string start",
+                "input": "hello world",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match after space",
+                "input": "say hello",
+                "matches": [
+                    {
+                        "start": 4,
+                        "end": 9,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match after punctuation",
+                "input": "(hello)",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 6,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - within word",
+                "input": "xhello",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Word boundary \\b - end of word",
+        "pattern": "hello\\b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match at string end",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match before space",
+                "input": "hello world",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match before punctuation",
+                "input": "hello!",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - within word",
+                "input": "hellox",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Word boundary \\b - complete word",
+        "pattern": "\\bhello\\b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match standalone word",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match word in sentence",
+                "input": "say hello there",
+                "matches": [
+                    {
+                        "start": 4,
+                        "end": 9,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - part of larger word",
+                "input": "xhellox",
+                "matches": []
+            },
+            {
+                "description": "no match - prefix match",
+                "input": "helloworld",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Non-word boundary \\B - not at word boundary",
+        "pattern": "\\Blo",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match within word",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 3,
+                        "end": 5,
+                        "match": "lo",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - at word boundary",
+                "input": "lo world",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Non-word boundary \\B - between non-word chars",
+        "pattern": "\\B-\\B",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match hyphen between non-word chars",
+                "input": "---",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "-",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - between word chars",
+                "input": "a-b",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Empty string with anchors",
+        "pattern": "^$",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match empty string",
+                "input": "",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - non-empty",
+                "input": "x",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Empty lines in multiline mode",
+        "pattern": "^$",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match empty line",
+                "input": "line1\n\nline3",
+                "matches": [
+                    {
+                        "start": 6,
+                        "end": 6,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

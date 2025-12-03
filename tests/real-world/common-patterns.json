@@ -1,0 +1,525 @@
+[
+    {
+        "description": "Email address - basic",
+        "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+        "flags": "",
+        "tests": [
+            {
+                "description": "valid simple email",
+                "input": "user@example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 16,
+                        "match": "user@example.com",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "email with dots",
+                "input": "first.last@example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 22,
+                        "match": "first.last@example.com",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "email with plus",
+                "input": "user+tag@example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 20,
+                        "match": "user+tag@example.com",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "subdomain email",
+                "input": "user@mail.example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 21,
+                        "match": "user@mail.example.com",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - missing domain",
+                "input": "user@",
+                "matches": []
+            },
+            {
+                "description": "no match - missing @",
+                "input": "userexample.com",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "URL - HTTP/HTTPS",
+        "pattern": "https?://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}(/[^\\s]*)?",
+        "flags": "",
+        "tests": [
+            {
+                "description": "simple http URL",
+                "input": "http://example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 18,
+                        "match": "http://example.com",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "https URL",
+                "input": "https://example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 19,
+                        "match": "https://example.com",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "URL with path",
+                "input": "https://example.com/path/to/page",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 32,
+                        "match": "https://example.com/path/to/page",
+                        "groups": [
+                            "/path/to/page"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "URL with subdomain",
+                "input": "https://www.example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 23,
+                        "match": "https://www.example.com",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Phone number - US format",
+        "pattern": "\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}",
+        "flags": "",
+        "tests": [
+            {
+                "description": "format with dashes",
+                "input": "555-123-4567",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 12,
+                        "match": "555-123-4567",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "format with dots",
+                "input": "555.123.4567",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 12,
+                        "match": "555.123.4567",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "format with parentheses",
+                "input": "(555)123-4567",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 13,
+                        "match": "(555)123-4567",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "format with spaces",
+                "input": "555 123 4567",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 12,
+                        "match": "555 123 4567",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no separators",
+                "input": "5551234567",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 10,
+                        "match": "5551234567",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "IPv4 address",
+        "pattern": "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "valid IP",
+                "input": "192.168.1.1",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "192.168.1.1",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "localhost",
+                "input": "127.0.0.1",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 9,
+                        "match": "127.0.0.1",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "IP in text",
+                "input": "Server at 10.0.0.1 is down",
+                "matches": [
+                    {
+                        "start": 10,
+                        "end": 18,
+                        "match": "10.0.0.1",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Date - YYYY-MM-DD",
+        "pattern": "\\d{4}-\\d{2}-\\d{2}",
+        "flags": "",
+        "tests": [
+            {
+                "description": "valid date",
+                "input": "2023-12-25",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 10,
+                        "match": "2023-12-25",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "date in text",
+                "input": "Meeting on 2023-06-15 at noon",
+                "matches": [
+                    {
+                        "start": 11,
+                        "end": 21,
+                        "match": "2023-06-15",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Time - 24-hour format",
+        "pattern": "([01]?\\d|2[0-3]):[0-5]\\d",
+        "flags": "",
+        "tests": [
+            {
+                "description": "midnight",
+                "input": "00:00",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "00:00",
+                        "groups": [
+                            "00"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "noon",
+                "input": "12:00",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "12:00",
+                        "groups": [
+                            "12"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "afternoon",
+                "input": "14:30",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "14:30",
+                        "groups": [
+                            "14"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "late night",
+                "input": "23:59",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "23:59",
+                        "groups": [
+                            "23"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Hex color code",
+        "pattern": "#[0-9A-Fa-f]{6}\\b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "lowercase hex",
+                "input": "#ff5733",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "#ff5733",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "uppercase hex",
+                "input": "#FF5733",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "#FF5733",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "mixed case",
+                "input": "#Ff5733",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "#Ff5733",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Credit card number (simple)",
+        "pattern": "\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}",
+        "flags": "",
+        "tests": [
+            {
+                "description": "with spaces",
+                "input": "1234 5678 9012 3456",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 19,
+                        "match": "1234 5678 9012 3456",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "with dashes",
+                "input": "1234-5678-9012-3456",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 19,
+                        "match": "1234-5678-9012-3456",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no separators",
+                "input": "1234567890123456",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 16,
+                        "match": "1234567890123456",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Username - alphanumeric and underscore",
+        "pattern": "^[a-zA-Z0-9_]{3,16}$",
+        "flags": "",
+        "tests": [
+            {
+                "description": "valid username lowercase",
+                "input": "user123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "user123",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "valid with underscore",
+                "input": "user_name",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 9,
+                        "match": "user_name",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "minimum length",
+                "input": "abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "abc",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - too short",
+                "input": "ab",
+                "matches": []
+            },
+            {
+                "description": "no match - special character",
+                "input": "user@name",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "HTML tag - simple",
+        "pattern": "<([a-z]+)([^>]*)>",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "simple div tag",
+                "input": "<div>",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "<div>",
+                        "groups": [
+                            "div",
+                            ""
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "tag with attributes",
+                "input": "<div class=\"container\">",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 23,
+                        "match": "<div class=\"container\">",
+                        "groups": [
+                            "div",
+                            " class=\"container\""
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "self-closing tag",
+                "input": "<br/>",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "<br/>",
+                        "groups": [
+                            "br",
+                            "/"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

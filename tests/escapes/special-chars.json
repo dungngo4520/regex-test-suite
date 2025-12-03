@@ -1,0 +1,185 @@
+[
+    {
+        "description": "Escape sequences - basic",
+        "pattern": "\\n\\r\\t",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match newline, carriage return, tab",
+                "input": "\n\r\t",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "\n\r\t",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Literal backslash",
+        "pattern": "\\\\",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match single backslash",
+                "input": "\\",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "\\",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Escaped metacharacters",
+        "pattern": "\\+\\*\\?\\[\\]\\(\\)\\{\\}\\^\\$\\|",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match all escaped metacharacters",
+                "input": "+*?[](){}^$|",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 12,
+                        "match": "+*?[](){}^$|",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Octal escape \\0",
+        "pattern": "\\0",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match null character",
+                "input": "\u0000",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "\u0000",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Hex escape \\x",
+        "pattern": "\\x41",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match 'A' via hex",
+                "input": "A",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "A",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode escape \\u",
+        "pattern": "\\u0041",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match 'A' via unicode",
+                "input": "A",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "A",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Control character escape",
+        "pattern": "\\cA",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match Ctrl-A",
+                "input": "\u0001",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "\u0001",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Escaped digit in character class",
+        "pattern": "[\\d]+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match digits",
+                "input": "123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "123",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Escaped bracket in character class",
+        "pattern": "[\\[\\]]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match opening bracket",
+                "input": "[",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "[",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match closing bracket",
+                "input": "]",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "]",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

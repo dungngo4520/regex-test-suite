@@ -1,0 +1,285 @@
+[
+    {
+        "description": "Literal character matching",
+        "pattern": "hello",
+        "flags": "",
+        "tests": [
+            {
+                "description": "exact match",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match within larger string",
+                "input": "say hello world",
+                "matches": [
+                    {
+                        "start": 4,
+                        "end": 9,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - different case",
+                "input": "HELLO",
+                "matches": []
+            },
+            {
+                "description": "no match - different text",
+                "input": "world",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Dot metacharacter - matches any character except newline",
+        "pattern": "h.llo",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match with letter",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match with digit",
+                "input": "h3llo",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "h3llo",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match with space",
+                "input": "h llo",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "h llo",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match with newline (default)",
+                "input": "h\nllo",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Dot with dotall flag - matches any character including newline",
+        "pattern": "h.llo",
+        "flags": "s",
+        "tests": [
+            {
+                "description": "match with newline when dotall enabled",
+                "input": "h\nllo",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "h\nllo",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Escaped metacharacter - literal dot",
+        "pattern": "hello\\.",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match literal dot",
+                "input": "hello.",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "hello.",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match without dot",
+                "input": "hello",
+                "matches": []
+            },
+            {
+                "description": "no match with other character",
+                "input": "hellox",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Multiple metacharacters",
+        "pattern": "a.b.c",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match with various characters",
+                "input": "a1b2c",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "a1b2c",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match with spaces",
+                "input": "a b c",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "a b c",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Empty string pattern",
+        "pattern": "",
+        "flags": "",
+        "tests": [
+            {
+                "description": "matches at start of string",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "matches empty string",
+                "input": "",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Case sensitive matching (default)",
+        "pattern": "Test",
+        "flags": "",
+        "tests": [
+            {
+                "description": "exact case match",
+                "input": "Test",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Test",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - lowercase",
+                "input": "test",
+                "matches": []
+            },
+            {
+                "description": "no match - uppercase",
+                "input": "TEST",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Case insensitive matching",
+        "pattern": "Test",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "match exact case",
+                "input": "Test",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Test",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match lowercase",
+                "input": "test",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "test",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match uppercase",
+                "input": "TEST",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "TEST",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match mixed case",
+                "input": "TeSt",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "TeSt",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,316 @@
+[
+    {
+        "description": "Positive lookahead (?=...)",
+        "pattern": "\\w+(?=@)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match word before @",
+                "input": "user@example",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "user",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - no @ after",
+                "input": "user",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Negative lookahead (?!...)",
+        "pattern": "\\w+(?!@)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match word not followed by @",
+                "input": "user",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "user",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "partial match before @",
+                "input": "user@",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "use",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Positive lookbehind (?<=...)",
+        "pattern": "(?<=@)\\w+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match word after @",
+                "input": "user@example",
+                "matches": [
+                    {
+                        "start": 5,
+                        "end": 12,
+                        "match": "example",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - no @ before",
+                "input": "example",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Negative lookbehind (?<!...)",
+        "pattern": "(?<!@)\\w+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match word not preceded by @",
+                "input": "example",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "example",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match first word",
+                "input": "user@example",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "user",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple lookaheads",
+        "pattern": "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match string with lowercase, uppercase, and digit",
+                "input": "Password1",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 9,
+                        "match": "Password1",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - missing digit",
+                "input": "Password",
+                "matches": []
+            },
+            {
+                "description": "no match - missing uppercase",
+                "input": "password1",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Lookahead at specific position",
+        "pattern": "^(?=.*@).+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match if @ exists anywhere",
+                "input": "user@example.com",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 16,
+                        "match": "user@example.com",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - no @",
+                "input": "userexample.com",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Lookbehind with fixed width",
+        "pattern": "(?<=\\d{3})\\w+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match after exactly 3 digits",
+                "input": "123abc",
+                "matches": [
+                    {
+                        "start": 3,
+                        "end": 6,
+                        "match": "abc",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - only 2 digits",
+                "input": "12abc",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Lookahead for word boundary",
+        "pattern": "\\w+(?=\\b)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match word at boundary",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Combining lookahead and lookbehind",
+        "pattern": "(?<=<)\\w+(?=>)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match content between < and >",
+                "input": "<tag>",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 4,
+                        "match": "tag",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - missing <",
+                "input": "tag>",
+                "matches": []
+            },
+            {
+                "description": "no match - missing >",
+                "input": "<tag",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Nested lookaheads",
+        "pattern": "(?=.*(?=.*[A-Z]))",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match if uppercase exists",
+                "input": "Hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Lookahead with alternation",
+        "pattern": "\\w+(?=@|#)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match before @",
+                "input": "user@domain",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "user",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match before #",
+                "input": "user#tag",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "user",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - neither @ nor #",
+                "input": "user",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Negative lookahead for exclusion",
+        "pattern": "^(?!.*password).*$",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "match - doesn't contain 'password'",
+                "input": "mySecret123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "mySecret123",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - contains 'password'",
+                "input": "myPassword123",
+                "matches": []
+            }
+        ]
+    }
+]

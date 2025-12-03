@@ -1,0 +1,296 @@
+[
+    {
+        "description": "Unicode letter \\p{L}",
+        "pattern": "\\p{L}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match ASCII letters",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match Greek letters",
+                "input": "Γεια",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Γεια",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match Cyrillic",
+                "input": "Привет",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "Привет",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match Japanese hiragana",
+                "input": "こんにちは",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "こんにちは",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode decimal number \\p{Nd}",
+        "pattern": "\\p{Nd}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match ASCII digits",
+                "input": "123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "123",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match Arabic-Indic digits",
+                "input": "٠١٢",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "٠١٢",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode whitespace \\p{Z}",
+        "pattern": "\\p{Z}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match regular space",
+                "input": " ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": " ",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match non-breaking space",
+                "input": "\u00A0",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "\u00A0",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode emoji \\p{Emoji}",
+        "pattern": "\\p{Emoji}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match emoji",
+                "input": "😀",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "😀",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match multiple emoji",
+                "input": "😀😃😄",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "😀😃😄",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode script - Greek",
+        "pattern": "\\p{Script=Greek}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match Greek text",
+                "input": "Αλφάβητο",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "match": "Αλφάβητο",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - Latin text",
+                "input": "alphabet",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Unicode category - Uppercase Letter",
+        "pattern": "\\p{Lu}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match uppercase ASCII",
+                "input": "HELLO",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "HELLO",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match uppercase Greek",
+                "input": "ΓΕΙΑ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "ΓΕΙΑ",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - lowercase",
+                "input": "hello",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Unicode category - Lowercase Letter",
+        "pattern": "\\p{Ll}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match lowercase ASCII",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - uppercase",
+                "input": "HELLO",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Negated Unicode property",
+        "pattern": "\\P{L}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match non-letters",
+                "input": "123!@#",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "123!@#",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - letters",
+                "input": "hello",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Unicode combining characters",
+        "pattern": "\\w\\p{M}+",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match base character with combining marks",
+                "input": "é",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "é",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Astral plane characters",
+        "pattern": "[\\u{1F600}-\\u{1F64F}]",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match emoji in astral plane",
+                "input": "😀",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "😀",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

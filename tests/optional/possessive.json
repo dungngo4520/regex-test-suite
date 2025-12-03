@@ -1,0 +1,100 @@
+[
+    {
+        "description": "Possessive quantifier - one or more +",
+        "pattern": "a++b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match with trailing 'b'",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - possessive consumes all",
+                "input": "aaa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Possessive quantifier - zero or more *",
+        "pattern": "a*+b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match with 'b'",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 'b' alone",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Possessive vs greedy behavior",
+        "pattern": "\\d++\\d",
+        "flags": "",
+        "tests": [
+            {
+                "description": "no match - possessive won't backtrack",
+                "input": "123",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Atomic group (?>...)",
+        "pattern": "(?>\\d+)\\d",
+        "flags": "",
+        "tests": [
+            {
+                "description": "no match - atomic group doesn't backtrack",
+                "input": "123",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Atomic group success",
+        "pattern": "(?>\\d+)x",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match when pattern continues",
+                "input": "123x",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "123x",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

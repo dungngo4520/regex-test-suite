@@ -1,0 +1,427 @@
+[
+    {
+        "description": "Zero or more (asterisk) - greedy",
+        "pattern": "a*",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match empty string",
+                "input": "",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match single 'a'",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match multiple 'a's",
+                "input": "aaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaaa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match zero 'a's before 'b'",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "One or more (plus) - greedy",
+        "pattern": "a+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match single 'a'",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match multiple 'a's",
+                "input": "aaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaaa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - empty string",
+                "input": "",
+                "matches": []
+            },
+            {
+                "description": "no match - different character",
+                "input": "b",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Zero or one (question mark) - greedy",
+        "pattern": "a?",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match single 'a'",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match zero 'a's",
+                "input": "",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match one 'a' from multiple",
+                "input": "aaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Exact count {n}",
+        "pattern": "a{3}",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match exactly 3 'a's",
+                "input": "aaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aaa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - 2 'a's",
+                "input": "aa",
+                "matches": []
+            },
+            {
+                "description": "match first 3 from 4",
+                "input": "aaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aaa",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "At least n {n,}",
+        "pattern": "a{2,}",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match exactly 2",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 5",
+                "input": "aaaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "aaaaa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - only 1",
+                "input": "a",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Range {n,m}",
+        "pattern": "a{2,4}",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match 2",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 3",
+                "input": "aaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aaa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 4",
+                "input": "aaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaaa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 4 from 5 (greedy)",
+                "input": "aaaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaaa",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - only 1",
+                "input": "a",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Lazy asterisk *?",
+        "pattern": "a*?",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match zero (lazy)",
+                "input": "aaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Lazy plus +?",
+        "pattern": "a+?",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match one (lazy minimum)",
+                "input": "aaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Lazy question mark ??",
+        "pattern": "a??",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match zero (lazy)",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Lazy range {n,m}?",
+        "pattern": "a{2,4}?",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match minimum 2 (lazy)",
+                "input": "aaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Greedy vs lazy with context",
+        "pattern": "<.*>",
+        "flags": "",
+        "tests": [
+            {
+                "description": "greedy - match to last >",
+                "input": "<tag>content</tag>",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 18,
+                        "match": "<tag>content</tag>",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Greedy vs lazy with context - lazy version",
+        "pattern": "<.*?>",
+        "flags": "",
+        "tests": [
+            {
+                "description": "lazy - match to first >",
+                "input": "<tag>content</tag>",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "<tag>",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Quantifier on character class",
+        "pattern": "[0-9]+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match sequence of digits",
+                "input": "abc123def",
+                "matches": [
+                    {
+                        "start": 3,
+                        "end": 6,
+                        "match": "123",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested quantifiers - invalid in most engines",
+        "pattern": "(a+)+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match repeated 'a's",
+                "input": "aaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aaa",
+                        "groups": [
+                            "aaa"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

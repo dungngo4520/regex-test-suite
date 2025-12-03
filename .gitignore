@@ -1,0 +1,16 @@
+.DS_Store
+*.pyc
+__pycache__/
+.pytest_cache/
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.iml
+node_modules/
+package-lock.json
+yarn.lock
+.env
+venv/
+env/

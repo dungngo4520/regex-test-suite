@@ -1,0 +1,363 @@
+[
+    {
+        "description": "Simple capturing group",
+        "pattern": "(\\d+)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "capture digits",
+                "input": "abc123def",
+                "matches": [
+                    {
+                        "start": 3,
+                        "end": 6,
+                        "match": "123",
+                        "groups": [
+                            "123"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple capturing groups",
+        "pattern": "(\\w+)@(\\w+)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "capture username and domain",
+                "input": "user@example",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 12,
+                        "match": "user@example",
+                        "groups": [
+                            "user",
+                            "example"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested capturing groups",
+        "pattern": "((\\w+)@(\\w+))",
+        "flags": "",
+        "tests": [
+            {
+                "description": "capture outer and inner groups",
+                "input": "user@example",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 12,
+                        "match": "user@example",
+                        "groups": [
+                            "user@example",
+                            "user",
+                            "example"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Non-capturing group (?:...)",
+        "pattern": "(?:\\d+)-(\\w+)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "only capture second group",
+                "input": "123-abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "123-abc",
+                        "groups": [
+                            "abc"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Alternation in group",
+        "pattern": "(cat|dog)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "capture 'cat'",
+                "input": "cat",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "cat",
+                        "groups": [
+                            "cat"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "capture 'dog'",
+                "input": "dog",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "dog",
+                        "groups": [
+                            "dog"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Optional group",
+        "pattern": "(\\d+)-(\\w+)?",
+        "flags": "",
+        "tests": [
+            {
+                "description": "both groups present",
+                "input": "123-abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "123-abc",
+                        "groups": [
+                            "123",
+                            "abc"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "second group absent",
+                "input": "123-",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "123-",
+                        "groups": [
+                            "123",
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Repeated capturing group",
+        "pattern": "(\\d)+",
+        "flags": "",
+        "tests": [
+            {
+                "description": "capture last occurrence",
+                "input": "123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "123",
+                        "groups": [
+                            "3"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Empty capturing group",
+        "pattern": "(a)?b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "group matches",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "group doesn't match",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Backreference \\1",
+        "pattern": "(\\w)\\1",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match repeated character",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "match different repeated character",
+                "input": "bb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "bb",
+                        "groups": [
+                            "b"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "no match - different characters",
+                "input": "ab",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Multiple backreferences",
+        "pattern": "(\\w)(\\w)\\2\\1",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match palindrome pattern",
+                "input": "abba",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "abba",
+                        "groups": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "no match - wrong order",
+                "input": "abab",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Backreference to optional group",
+        "pattern": "(a)?b\\1",
+        "flags": "",
+        "tests": [
+            {
+                "description": "group matches and backreference matches",
+                "input": "aba",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aba",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Case-insensitive backreference",
+        "pattern": "(\\w)\\1",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "match different case",
+                "input": "Aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "Aa",
+                        "groups": [
+                            "A"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Backreference in alternation",
+        "pattern": "(a)\\1|(b)\\2",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match first alternative",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a",
+                            null
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "match second alternative",
+                "input": "bb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "bb",
+                        "groups": [
+                            null,
+                            "b"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

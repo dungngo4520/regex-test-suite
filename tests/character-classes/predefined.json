@@ -1,0 +1,663 @@
+[
+    {
+        "description": "Digit class \\d",
+        "pattern": "\\d",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match single digit",
+                "input": "5",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "5",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match digit in string",
+                "input": "abc3def",
+                "matches": [
+                    {
+                        "start": 3,
+                        "end": 4,
+                        "match": "3",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - letter",
+                "input": "a",
+                "matches": []
+            },
+            {
+                "description": "no match - space",
+                "input": " ",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Non-digit class \\D",
+        "pattern": "\\D",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match letter",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match space",
+                "input": " ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": " ",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - digit",
+                "input": "5",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Word character class \\w",
+        "pattern": "\\w",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match lowercase letter",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match uppercase letter",
+                "input": "Z",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "Z",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match digit",
+                "input": "9",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "9",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match underscore",
+                "input": "_",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "_",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - space",
+                "input": " ",
+                "matches": []
+            },
+            {
+                "description": "no match - punctuation",
+                "input": "!",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Non-word character class \\W",
+        "pattern": "\\W",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match space",
+                "input": " ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": " ",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match punctuation",
+                "input": "!",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "!",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - letter",
+                "input": "a",
+                "matches": []
+            },
+            {
+                "description": "no match - digit",
+                "input": "5",
+                "matches": []
+            },
+            {
+                "description": "no match - underscore",
+                "input": "_",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Whitespace class \\s",
+        "pattern": "\\s",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match space",
+                "input": " ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": " ",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match tab",
+                "input": "\t",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "\t",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match newline",
+                "input": "\n",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "\n",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match carriage return",
+                "input": "\r",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "\r",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - letter",
+                "input": "a",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Non-whitespace class \\S",
+        "pattern": "\\S",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match letter",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match digit",
+                "input": "5",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "5",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - space",
+                "input": " ",
+                "matches": []
+            },
+            {
+                "description": "no match - tab",
+                "input": "\t",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Custom character class - simple",
+        "pattern": "[abc]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match 'a'",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 'b'",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 'c'",
+                "input": "c",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "c",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - 'd'",
+                "input": "d",
+                "matches": []
+            },
+            {
+                "description": "match first matching character",
+                "input": "xbyz",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Character class range",
+        "pattern": "[a-z]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match lowercase letter",
+                "input": "m",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "m",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 'a'",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 'z'",
+                "input": "z",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "z",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - uppercase",
+                "input": "M",
+                "matches": []
+            },
+            {
+                "description": "no match - digit",
+                "input": "5",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Multiple ranges in character class",
+        "pattern": "[a-zA-Z0-9]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match lowercase",
+                "input": "g",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "g",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match uppercase",
+                "input": "G",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "G",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match digit",
+                "input": "7",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "7",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - underscore",
+                "input": "_",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Negated character class",
+        "pattern": "[^abc]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match 'd'",
+                "input": "d",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "d",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match digit",
+                "input": "5",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "5",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - 'a'",
+                "input": "a",
+                "matches": []
+            },
+            {
+                "description": "no match - 'b'",
+                "input": "b",
+                "matches": []
+            },
+            {
+                "description": "no match - 'c'",
+                "input": "c",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Negated range",
+        "pattern": "[^0-9]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match letter",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match space",
+                "input": " ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": " ",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - digit",
+                "input": "5",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Special characters in character class",
+        "pattern": "[.+*?]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match literal dot",
+                "input": ".",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": ".",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match literal plus",
+                "input": "+",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "+",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match literal asterisk",
+                "input": "*",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "*",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match literal question mark",
+                "input": "?",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "?",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Hyphen in character class - at start",
+        "pattern": "[-abc]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match literal hyphen",
+                "input": "-",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "-",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 'a'",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Hyphen in character class - at end",
+        "pattern": "[abc-]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match literal hyphen",
+                "input": "-",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "-",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match 'c'",
+                "input": "c",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "c",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Empty character class behavior",
+        "pattern": "[]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "no match - invalid or matches nothing",
+                "input": "a",
+                "matches": []
+            }
+        ]
+    }
+]

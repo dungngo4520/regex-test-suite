@@ -1,0 +1,36 @@
+name: Validate Test Suite
+
+on:
+    push:
+        branches: [main, develop]
+    pull_request:
+        branches: [main]
+
+jobs:
+    validate:
+        name: Validate Test Files
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.x"
+
+            - name: Validate test files
+              run: |
+                  python3 bin/validate_suite.py
+
+            - name: Run example tests
+              run: |
+                  python3 bin/run_tests.py
+              continue-on-error: true # Some tests may fail on Python's re module
+
+            - name: Check test count
+              run: |
+                  echo "Test Statistics:"
+                  find tests -name "*.json" | wc -l
+                  echo "test files found"

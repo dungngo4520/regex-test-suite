@@ -1,0 +1,143 @@
+[
+    {
+        "description": "Pipe alternation - simple",
+        "pattern": "cat|dog",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match first alternative",
+                "input": "cat",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "cat",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match second alternative",
+                "input": "dog",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "dog",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - different word",
+                "input": "bird",
+                "matches": []
+            },
+            {
+                "description": "match first occurrence in string",
+                "input": "I have a cat and a dog",
+                "matches": [
+                    {
+                        "start": 9,
+                        "end": 12,
+                        "match": "cat",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple alternatives",
+        "pattern": "red|green|blue",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match first",
+                "input": "red",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "red",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match middle",
+                "input": "green",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "green",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match last",
+                "input": "blue",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "blue",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Alternation with empty string",
+        "pattern": "hello|",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match non-empty alternative",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match empty alternative",
+                "input": "world",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Alternation precedence - left to right",
+        "pattern": "cat|category",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match shorter alternative first",
+                "input": "category",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "cat",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]
