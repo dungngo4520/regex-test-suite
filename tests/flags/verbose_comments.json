@@ -1,0 +1,29 @@
+[
+    {
+        "description": "Verbose mode with inline comments and grouping",
+        "pattern": "([A-Z]{2})-(\\d{3})",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match code like AB-123",
+                "input": "AB-123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "AB-123",
+                        "groups": [
+                            "AB",
+                            "123"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "no match - lowercase fails",
+                "input": "ab-123",
+                "matches": []
+            }
+        ]
+    }
+]

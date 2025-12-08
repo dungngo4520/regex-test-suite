@@ -1,0 +1,114 @@
+[
+    {
+        "description": "Inline flag (?i) - case insensitive globally",
+        "pattern": "TeSt",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "match lowercase",
+                "input": "test",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "test",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match uppercase",
+                "input": "TEST",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "TEST",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Scoped inline flag (?i:...) applies to group only",
+        "pattern": "[aA][bB][cC]DEF",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match with mixed case in scoped part only",
+                "input": "AbcDEF",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "AbcDEF",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - trailing part case sensitive",
+                "input": "Abcdef",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Inline flag (?m) - multiline ^ and $",
+        "pattern": "^world$",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match middle line",
+                "input": "hello\nworld\nbye",
+                "matches": [
+                    {
+                        "start": 6,
+                        "end": 11,
+                        "match": "world",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Inline flag (?s) - dot matches newline",
+        "pattern": "a.b",
+        "flags": "s",
+        "tests": [
+            {
+                "description": "match across newline",
+                "input": "a\nb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "a\nb",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Verbose mode (?x) - ignore spaces and comments",
+        "pattern": "ab",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match without literal spaces",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

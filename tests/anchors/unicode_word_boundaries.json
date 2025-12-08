@@ -1,0 +1,49 @@
+[
+    {
+        "description": "Unicode word boundary with non-ASCII letters",
+        "pattern": "(?:^|\\s)(Γεια)(?:\\s|$)",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match standalone Greek word",
+                "input": "Γεια",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Γεια",
+                        "groups": [
+                            "Γεια"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "no match embedded in text",
+                "input": "xΓειαx",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Unicode word boundary within sentence",
+        "pattern": "(?:^|\\s)(Привет)(?:\\s|$)",
+        "flags": "u",
+        "tests": [
+            {
+                "description": "match Cyrillic word",
+                "input": "скажи Привет сейчас",
+                "matches": [
+                    {
+                        "start": 5,
+                        "end": 13,
+                        "match": " Привет ",
+                        "groups": [
+                            "Привет"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

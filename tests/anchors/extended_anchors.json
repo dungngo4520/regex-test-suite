@@ -1,0 +1,41 @@
+[
+    {
+        "description": "String boundary ^ and $ with multiline",
+        "description": "^ vs \\A in multiline",
+        "pattern": "^hello",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match at start of second line with ^ + m",
+                "input": "world\nhello",
+                "matches": [
+                    {
+                        "start": 6,
+                        "end": 11,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "\\Z vs $ in multiline",
+        "pattern": "world$",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match before newline with $ + m",
+                "input": "world\nhello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "world",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

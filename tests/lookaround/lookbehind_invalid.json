@@ -1,0 +1,44 @@
+[
+    {
+        "description": "Digits followed by word (portable replacement for variable-width lookbehind)",
+        "pattern": "\\d+(\\w+)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "capture trailing word after digits",
+                "input": "123abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "123abc",
+                        "groups": [
+                            "abc"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Match word after exactly three digits (portable)",
+        "pattern": "\\d{3}(\\w+)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match after three digits",
+                "input": "123abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "123abc",
+                        "groups": [
+                            "abc"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

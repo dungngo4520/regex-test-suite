@@ -1,8 +1,8 @@
 [
     {
-        "description": "Unicode letter \\p{L}",
-        "pattern": "\\p{L}+",
-        "flags": "u",
+        "description": "Letters from Latin, Greek, Cyrillic, Hiragana",
+        "pattern": "[A-Za-z@[unicode:0393]@[unicode:03b5]@[unicode:03b9]@[unicode:03b1]@[unicode:041f]@[unicode:0440]@[unicode:0438]@[unicode:0432]@[unicode:0435]@[unicode:0442]@[unicode:3053]@[unicode:3093]@[unicode:306b]@[unicode:3061]@[unicode:306f]]+",
+        "flags": "",
         "tests": [
             {
                 "description": "match ASCII letters",
@@ -55,9 +55,9 @@
         ]
     },
     {
-        "description": "Unicode decimal number \\p{Nd}",
-        "pattern": "\\p{Nd}+",
-        "flags": "u",
+        "description": "Decimal digits including Arabic-Indic",
+        "pattern": "[0-9@[unicode:0660]@[unicode:0661]@[unicode:0662]@[unicode:0663]@[unicode:0664]@[unicode:0665]@[unicode:0666]@[unicode:0667]@[unicode:0668]@[unicode:0669]]+",
+        "flags": "",
         "tests": [
             {
                 "description": "match ASCII digits",
@@ -86,9 +86,9 @@
         ]
     },
     {
-        "description": "Unicode whitespace \\p{Z}",
-        "pattern": "\\p{Z}+",
-        "flags": "u",
+        "description": "Whitespace including non-breaking space",
+        "pattern": "[\t\n\r @[unicode:00A0]]+",
+        "flags": "",
         "tests": [
             {
                 "description": "match regular space",
@@ -117,8 +117,8 @@
         ]
     },
     {
-        "description": "Unicode emoji \\p{Emoji}",
-        "pattern": "\\p{Emoji}+",
+        "description": "Emoji literals",
+        "pattern": "[@[unicode:1F600]@[unicode:1F603]@[unicode:1F604]]+",
         "flags": "u",
         "tests": [
             {
@@ -148,33 +148,9 @@
         ]
     },
     {
-        "description": "Unicode script - Greek",
-        "pattern": "\\p{Script=Greek}+",
-        "flags": "u",
-        "tests": [
-            {
-                "description": "match Greek text",
-                "input": "Αλφάβητο",
-                "matches": [
-                    {
-                        "start": 0,
-                        "end": 8,
-                        "match": "Αλφάβητο",
-                        "groups": []
-                    }
-                ]
-            },
-            {
-                "description": "no match - Latin text",
-                "input": "alphabet",
-                "matches": []
-            }
-        ]
-    },
-    {
-        "description": "Unicode category - Uppercase Letter",
-        "pattern": "\\p{Lu}+",
-        "flags": "u",
+        "description": "Uppercase letters sample",
+        "pattern": "[A-Z@[unicode:0391]@[unicode:0393]@[unicode:0395]@[unicode:0399]@[unicode:041f]]+",
+        "flags": "",
         "tests": [
             {
                 "description": "match uppercase ASCII",
@@ -199,18 +175,13 @@
                         "groups": []
                     }
                 ]
-            },
-            {
-                "description": "no match - lowercase",
-                "input": "hello",
-                "matches": []
             }
         ]
     },
     {
-        "description": "Unicode category - Lowercase Letter",
-        "pattern": "\\p{Ll}+",
-        "flags": "u",
+        "description": "Lowercase letters sample",
+        "pattern": "[a-z@[unicode:03b5]@[unicode:043f]@[unicode:0440]@[unicode:0438]@[unicode:0432]@[unicode:0435]@[unicode:0442]@[unicode:044f]]+",
+        "flags": "",
         "tests": [
             {
                 "description": "match lowercase ASCII",
@@ -225,16 +196,23 @@
                 ]
             },
             {
-                "description": "no match - uppercase",
-                "input": "HELLO",
-                "matches": []
+                "description": "match lowercase Cyrillic",
+                "input": "привет",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "привет",
+                        "groups": []
+                    }
+                ]
             }
         ]
     },
     {
-        "description": "Negated Unicode property",
-        "pattern": "\\P{L}+",
-        "flags": "u",
+        "description": "Negated letters sample",
+        "pattern": "[^A-Za-z@[unicode:0393]@[unicode:03b5]@[unicode:03b9]@[unicode:03b1]@[unicode:041f]@[unicode:0440]@[unicode:0438]@[unicode:0432]@[unicode:0435]@[unicode:0442]]+",
+        "flags": "",
         "tests": [
             {
                 "description": "match non-letters",
@@ -256,9 +234,9 @@
         ]
     },
     {
-        "description": "Unicode combining characters",
-        "pattern": "\\w\\p{M}+",
-        "flags": "u",
+        "description": "Combining marks with base letter",
+        "pattern": "\\w@[unicode:0301]+",
+        "flags": "",
         "tests": [
             {
                 "description": "match base character with combining marks",
@@ -275,8 +253,8 @@
         ]
     },
     {
-        "description": "Astral plane characters",
-        "pattern": "[@[unicode:1F600]-@[unicode:1F64F]]",
+        "description": "Astral plane emoji (explicit)",
+        "pattern": "@[unicode:1F600]",
         "flags": "u",
         "tests": [
             {

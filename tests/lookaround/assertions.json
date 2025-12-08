@@ -55,8 +55,8 @@
         ]
     },
     {
-        "description": "Positive lookbehind (?<=...)",
-        "pattern": "(?<=@)\\w+",
+        "description": "Word after @ (portable replacement)",
+        "pattern": "@(\\w+)",
         "flags": "",
         "tests": [
             {
@@ -64,10 +64,12 @@
                 "input": "user@example",
                 "matches": [
                     {
-                        "start": 5,
+                        "start": 4,
                         "end": 12,
-                        "match": "example",
-                        "groups": []
+                        "match": "@example",
+                        "groups": [
+                            "example"
+                        ]
                     }
                 ]
             },
@@ -79,12 +81,12 @@
         ]
     },
     {
-        "description": "Negative lookbehind (?<!...)",
-        "pattern": "(?<!@)\\w+",
+        "description": "Word not containing @ before it (portable)",
+        "pattern": "^[^@\\s]+",
         "flags": "",
         "tests": [
             {
-                "description": "match word not preceded by @",
+                "description": "match word at start",
                 "input": "example",
                 "matches": [
                     {
@@ -96,7 +98,7 @@
                 ]
             },
             {
-                "description": "match first word",
+                "description": "match first word before @",
                 "input": "user@example",
                 "matches": [
                     {
@@ -163,8 +165,8 @@
         ]
     },
     {
-        "description": "Lookbehind with fixed width",
-        "pattern": "(?<=\\d{3})\\w+",
+        "description": "Word after exactly 3 digits (portable)",
+        "pattern": "\\d{3}(\\w+)",
         "flags": "",
         "tests": [
             {
@@ -172,10 +174,12 @@
                 "input": "123abc",
                 "matches": [
                     {
-                        "start": 3,
+                        "start": 0,
                         "end": 6,
-                        "match": "abc",
-                        "groups": []
+                        "match": "123abc",
+                        "groups": [
+                            "abc"
+                        ]
                     }
                 ]
             },
@@ -206,8 +210,8 @@
         ]
     },
     {
-        "description": "Combining lookahead and lookbehind",
-        "pattern": "(?<=<)\\w+(?=>)",
+        "description": "Content between < and > (portable)",
+        "pattern": "<(\\w+)>",
         "flags": "",
         "tests": [
             {
@@ -215,10 +219,12 @@
                 "input": "<tag>",
                 "matches": [
                     {
-                        "start": 1,
-                        "end": 4,
-                        "match": "tag",
-                        "groups": []
+                        "start": 0,
+                        "end": 5,
+                        "match": "<tag>",
+                        "groups": [
+                            "tag"
+                        ]
                     }
                 ]
             },

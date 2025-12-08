@@ -1,0 +1,59 @@
+[
+    {
+        "description": "CRLF line endings with multiline ^",
+        "pattern": "^hello",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match after CRLF",
+                "input": "world\r\nhello",
+                "matches": [
+                    {
+                        "start": 7,
+                        "end": 12,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "CRLF line endings with $ (consume optional CR)",
+        "pattern": "world\r?$",
+        "flags": "m",
+        "tests": [
+            {
+                "description": "match before CRLF",
+                "input": "world\r\nhello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "world\r",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Dot matches CR (with dotAll)",
+        "pattern": "a.b",
+        "flags": "s",
+        "tests": [
+            {
+                "description": "match across CR",
+                "input": "a\rb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "a\rb",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

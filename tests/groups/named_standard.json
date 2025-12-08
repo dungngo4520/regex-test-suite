@@ -1,0 +1,45 @@
+[
+    {
+        "description": "Standard named group via annotations and backref",
+        "pattern": "@[named:user,\\w+]@@[named:domain,\\w+]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "capture user and domain",
+                "input": "john@example",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 12,
+                        "match": "john@example",
+                        "groups": [
+                            "john",
+                            "example"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Named backreference via annotations",
+        "pattern": "@[named:word,\\w+]\\s+@[backref:word]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "repeat same word",
+                "input": "hello hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "hello hello",
+                        "groups": [
+                            "hello"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
