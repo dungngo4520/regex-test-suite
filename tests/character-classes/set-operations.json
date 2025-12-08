@@ -3,7 +3,6 @@
         "description": "Character class intersection [a-z&&[aeiou]]",
         "pattern": "[a-z&&[aeiou]]",
         "flags": "",
-        "engine": "java",
         "tests": [
             {
                 "description": "match vowel",
@@ -28,7 +27,6 @@
         "description": "Character class subtraction [a-z--[aeiou]]",
         "pattern": "[a-z--[aeiou]]",
         "flags": "",
-        "engine": "ruby",
         "tests": [
             {
                 "description": "match consonant",
@@ -53,7 +51,6 @@
         "description": "Nested intersection [[a-z]&&[^aeiou]]",
         "pattern": "[[a-z]&&[^aeiou]]",
         "flags": "",
-        "engine": "java",
         "tests": [
             {
                 "description": "match consonant via intersection",
@@ -73,7 +70,6 @@
         "description": "Multiple intersections [0-9&&[0-4&&[0-2]]]",
         "pattern": "[0-9&&[0-4&&[0-2]]]",
         "flags": "",
-        "engine": "java",
         "tests": [
             {
                 "description": "match 0-2 only",
@@ -98,7 +94,6 @@
         "description": "Symmetric difference [a-z~~[aeiou]]",
         "pattern": "[a-z~~[aeiou]]",
         "flags": "",
-        "engine": "ruby",
         "tests": [
             {
                 "description": "match consonant",
@@ -149,7 +144,6 @@
         "description": "Complex set operation [a-z&&[^m-r]&&[^aeiou]]",
         "pattern": "[a-z&&[^m-r]&&[^aeiou]]",
         "flags": "",
-        "engine": "java",
         "tests": [
             {
                 "description": "match valid consonant",
@@ -174,7 +168,6 @@
         "description": "Unicode class intersection [\\p{L}&&[^\\p{Lu}]]",
         "pattern": "[\\p{L}&&[^\\p{Lu}]]",
         "flags": "",
-        "engine": "java",
         "tests": [
             {
                 "description": "match lowercase letter",

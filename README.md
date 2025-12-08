@@ -1,6 +1,6 @@
 # Regex Test Suite
 
-Regex test suite.
+There is no regex test suite so I created one!
 
 ## Usage
 
@@ -40,10 +40,6 @@ Annotations used in patterns:
     "description": "Test case description",
     "pattern": "@[unicode:00A0]+",
     "flags": "u",
-    "engine": "all",
-    "minVersion": "",
-    "skipEngines": [],
-    "expectCompileError": false,
     "tests": [
       {
         "description": "Individual test description",
@@ -53,8 +49,7 @@ Annotations used in patterns:
             "start": 0, 
             "end": 1, 
             "match": "\u00A0", 
-            "groups": [],
-            "namedGroups": {}
+            "groups": []
           }
         ]
       }
@@ -70,10 +65,6 @@ Annotations used in patterns:
 - `description`: Test case description (required)
 - `pattern`: The regex pattern (required)
 - `flags`: Regex flags: `i` (case-insensitive), `m` (multiline), `s` (dotall), `g` (global), `x` (verbose), `u` (unicode) (optional, default: "")
-- `engine`: Target engine: "all", "pcre", "perl", "python", "javascript", "java", etc. (optional, default: "all")
-- `minVersion`: Minimum engine version required (optional)
-- `skipEngines`: Array of engines to skip this test (optional)
-- `expectCompileError`: Whether pattern should fail to compile (optional, default: false)
 - `tests`: Array of individual test cases (required)
 
 **Individual test:**
@@ -88,7 +79,6 @@ Annotations used in patterns:
 - `end`: End position (exclusive, required)
 - `match`: Matched text (required)
 - `groups`: Array of captured groups, `null` for optional unmatched groups (optional)
-- `namedGroups`: Object with named group captures (optional)
 
 ## License
 

@@ -3,7 +3,6 @@
         "description": "Possessive plus quantifier a++",
         "pattern": "a++b",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match with trailing b",
@@ -28,7 +27,6 @@
         "description": "Possessive star quantifier a*+",
         "pattern": "a*+b",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match with b",
@@ -60,7 +58,6 @@
         "description": "Possessive question quantifier a?+",
         "pattern": "a?+b",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match with a",
@@ -92,7 +89,6 @@
         "description": "Possessive range quantifier a{2,4}+",
         "pattern": "a{2,4}+b",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match with trailing b",
@@ -117,7 +113,6 @@
         "description": "Possessive vs greedy behavior",
         "pattern": "\\d++\\d",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "no match - possessive won't backtrack",
@@ -130,7 +125,6 @@
         "description": "Atomic group (?>...) - equivalent to possessive",
         "pattern": "(?>\\d+)\\d",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "no match - atomic group doesn't backtrack",
@@ -143,7 +137,6 @@
         "description": "Atomic group success case",
         "pattern": "(?>\\d+)x",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match when pattern continues",
@@ -163,7 +156,6 @@
         "description": "Nested atomic groups",
         "pattern": "(?>a(?>b+)c)",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "nested atomic groups",
@@ -183,7 +175,6 @@
         "description": "Atomic group with alternation",
         "pattern": "(?>abc|abd)c",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match first alternative",
@@ -208,7 +199,6 @@
         "description": "Possessive in character class",
         "pattern": "[a-z]++b",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "no match - possessive takes 'b' too",

@@ -3,7 +3,6 @@
         "description": "Branch reset (?|...) - resets group numbers",
         "pattern": "(?|(a)|(b)|(c))\\1",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "first alternative with backreference",
@@ -53,7 +52,6 @@
         "description": "Branch reset with different group counts",
         "pattern": "(?|(a)(b)|(c))\\1",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "two groups with backreference",
@@ -91,7 +89,6 @@
         "description": "Nested branch reset",
         "pattern": "(?|(?|(a)|(b))|(c))\\1",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "nested first alternative",
@@ -113,7 +110,6 @@
         "description": "Branch reset with named groups",
         "pattern": "(?|(?<name>a)|(?<name>b))\\k<name>",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "first alternative",
@@ -149,7 +145,6 @@
         "description": "Branch reset for date parsing",
         "pattern": "(?|(\\d{4})-(\\d{2})-(\\d{2})|(\\d{2})/(\\d{2})/(\\d{4}))",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "ISO format",
@@ -189,7 +184,6 @@
         "description": "Branch reset with quantifiers",
         "pattern": "(?|(a+)|(b+))\\1",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "repeated a's",

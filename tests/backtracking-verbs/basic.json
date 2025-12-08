@@ -3,7 +3,6 @@
         "description": "FAIL verb (*FAIL) - force match failure",
         "pattern": "a(*FAIL)|b",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "first alternative fails, try second",
@@ -28,7 +27,6 @@
         "description": "PRUNE verb (*PRUNE) - prevent backtracking",
         "pattern": "a(*PRUNE)b|ab",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "first alternative succeeds",
@@ -53,7 +51,6 @@
         "description": "SKIP verb (*SKIP) - skip to here on failure",
         "pattern": "a(*SKIP)(*FAIL)|a.",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "skip past single 'a'",
@@ -73,7 +70,6 @@
         "description": "COMMIT verb (*COMMIT) - prevent all backtracking",
         "pattern": "a(*COMMIT)b|ac",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "commit to first alternative",
@@ -98,7 +94,6 @@
         "description": "ACCEPT verb (*ACCEPT) - end match successfully",
         "pattern": "a(*ACCEPT)b",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "match ends at ACCEPT",
@@ -118,7 +113,6 @@
         "description": "SKIP with name (*SKIP:NAME)",
         "pattern": "a(*SKIP:skip)b|a(*MARK:skip)c",
         "flags": "",
-        "engine": "pcre",
         "tests": [
             {
                 "description": "skip to marked position",
@@ -138,7 +132,6 @@
         "description": "MARK verb (*MARK:NAME) - mark position",
         "pattern": "(*MARK:start)a|b",
         "flags": "",
-        "engine": "pcre",
         "tests": [
             {
                 "description": "mark at start of pattern",
@@ -158,7 +151,6 @@
         "description": "THEN verb (*THEN) - jump to next alternative",
         "pattern": "a(*THEN)b|ab",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "THEN forces next alternative",
@@ -178,7 +170,6 @@
         "description": "Complex verb combination",
         "pattern": "(?:a(*PRUNE)b|c)d",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "first with prune",

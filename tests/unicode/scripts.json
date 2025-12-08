@@ -3,7 +3,6 @@
         "description": "Unicode Script - Latin \\p{Latin}",
         "pattern": "\\p{Latin}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Latin script",
@@ -23,16 +22,15 @@
         "description": "Unicode Script - Greek \\p{Greek}",
         "pattern": "\\p{Greek}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Greek script",
-                "input": "Γεια",
+                "input": "\u0393\u03b5\u03b9\u03b1",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "Γεια",
+                        "match": "\u0393\u03b5\u03b9\u03b1",
                         "groups": []
                     }
                 ]
@@ -43,16 +41,15 @@
         "description": "Unicode Script - Cyrillic \\p{Cyrillic}",
         "pattern": "\\p{Cyrillic}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Cyrillic script",
-                "input": "Привет",
+                "input": "\u041f\u0440\u0438\u0432\u0435\u0442",
                 "matches": [
                     {
                         "start": 0,
                         "end": 6,
-                        "match": "Привет",
+                        "match": "\u041f\u0440\u0438\u0432\u0435\u0442",
                         "groups": []
                     }
                 ]
@@ -63,16 +60,15 @@
         "description": "Unicode Script - Han (Chinese) \\p{Han}",
         "pattern": "\\p{Han}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Han characters",
-                "input": "你好",
+                "input": "\u4f60\u597d",
                 "matches": [
                     {
                         "start": 0,
                         "end": 2,
-                        "match": "你好",
+                        "match": "\u4f60\u597d",
                         "groups": []
                     }
                 ]
@@ -83,16 +79,15 @@
         "description": "Unicode Script - Hiragana \\p{Hiragana}",
         "pattern": "\\p{Hiragana}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Hiragana",
-                "input": "こんにちは",
+                "input": "\u3053\u3093\u306b\u3061\u306f",
                 "matches": [
                     {
                         "start": 0,
                         "end": 5,
-                        "match": "こんにちは",
+                        "match": "\u3053\u3093\u306b\u3061\u306f",
                         "groups": []
                     }
                 ]
@@ -103,16 +98,15 @@
         "description": "Unicode Script - Katakana \\p{Katakana}",
         "pattern": "\\p{Katakana}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Katakana",
-                "input": "カタカナ",
+                "input": "\u30ab\u30bf\u30ab\u30ca",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "カタカナ",
+                        "match": "\u30ab\u30bf\u30ab\u30ca",
                         "groups": []
                     }
                 ]
@@ -123,16 +117,15 @@
         "description": "Unicode Script - Arabic \\p{Arabic}",
         "pattern": "\\p{Arabic}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Arabic script",
-                "input": "مرحبا",
+                "input": "\u0645\u0631\u062d\u0628\u0627",
                 "matches": [
                     {
                         "start": 0,
                         "end": 5,
-                        "match": "مرحبا",
+                        "match": "\u0645\u0631\u062d\u0628\u0627",
                         "groups": []
                     }
                 ]
@@ -143,16 +136,15 @@
         "description": "Unicode Script - Hebrew \\p{Hebrew}",
         "pattern": "\\p{Hebrew}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Hebrew script",
-                "input": "שלום",
+                "input": "\u05e9\u05dc\u05d5\u05dd",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "שלום",
+                        "match": "\u05e9\u05dc\u05d5\u05dd",
                         "groups": []
                     }
                 ]
@@ -163,16 +155,15 @@
         "description": "Unicode Script - Devanagari \\p{Devanagari}",
         "pattern": "\\p{Devanagari}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Devanagari",
-                "input": "नमस्ते",
+                "input": "\u0928\u092e\u0938\u094d\u0924\u0947",
                 "matches": [
                     {
                         "start": 0,
                         "end": 6,
-                        "match": "नमस्ते",
+                        "match": "\u0928\u092e\u0938\u094d\u0924\u0947",
                         "groups": []
                     }
                 ]
@@ -183,16 +174,15 @@
         "description": "Unicode Script - Thai \\p{Thai}",
         "pattern": "\\p{Thai}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match Thai script",
-                "input": "สวัสดี",
+                "input": "\u0e2a\u0e27\u0e31\u0e2a\u0e14\u0e35",
                 "matches": [
                     {
                         "start": 0,
                         "end": 6,
-                        "match": "สวัสดี",
+                        "match": "\u0e2a\u0e27\u0e31\u0e2a\u0e14\u0e35",
                         "groups": []
                     }
                 ]
@@ -203,16 +193,15 @@
         "description": "Negated Script \\P{Latin} - non-Latin",
         "pattern": "\\P{Latin}+",
         "flags": "",
-        "engine": "pcre,perl,python,java,icu",
         "tests": [
             {
                 "description": "match non-Latin",
-                "input": "你好123",
+                "input": "\u4f60\u597d123",
                 "matches": [
                     {
                         "start": 0,
                         "end": 5,
-                        "match": "你好123",
+                        "match": "\u4f60\u597d123",
                         "groups": []
                     }
                 ]
@@ -223,16 +212,15 @@
         "description": "Script Extensions \\p{Scx=...}",
         "pattern": "\\p{Scx=Greek}+",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "match Greek script extensions",
-                "input": "Γεια",
+                "input": "\u0393\u03b5\u03b9\u03b1",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "Γεια",
+                        "match": "\u0393\u03b5\u03b9\u03b1",
                         "groups": []
                     }
                 ]

@@ -3,7 +3,6 @@
         "description": "Script run (*sr) - basic",
         "pattern": "(*sr:\\w+)",
         "flags": "",
-        "engine": "pcre",
         "minVersion": "10.40",
         "tests": [
             {
@@ -20,7 +19,7 @@
             },
             {
                 "description": "no match - mixed scripts",
-                "input": "helloпривет",
+                "input": "hello\u043f\u0440\u0438\u0432\u0435\u0442",
                 "matches": [
                     {
                         "start": 0,
@@ -36,17 +35,16 @@
         "description": "Script run with Cyrillic",
         "pattern": "(*sr:\\w+)",
         "flags": "",
-        "engine": "pcre",
         "minVersion": "10.40",
         "tests": [
             {
                 "description": "pure Cyrillic",
-                "input": "привет",
+                "input": "\u043f\u0440\u0438\u0432\u0435\u0442",
                 "matches": [
                     {
                         "start": 0,
                         "end": 6,
-                        "match": "привет",
+                        "match": "\u043f\u0440\u0438\u0432\u0435\u0442",
                         "groups": []
                     }
                 ]
@@ -55,19 +53,18 @@
     },
     {
         "description": "Script run with Greek",
-        "pattern": "(*sr:[α-ωΑ-Ω]+)",
+        "pattern": "(*sr:[\u03b1-\u03c9\u0391-\u03a9]+)",
         "flags": "",
-        "engine": "pcre",
         "minVersion": "10.40",
         "tests": [
             {
                 "description": "Greek text",
-                "input": "Αλφα",
+                "input": "\u0391\u03bb\u03c6\u03b1",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "Αλφα",
+                        "match": "\u0391\u03bb\u03c6\u03b1",
                         "groups": []
                     }
                 ]
@@ -78,7 +75,6 @@
         "description": "Script run with numbers (Common script)",
         "pattern": "(*sr:\\w+)",
         "flags": "",
-        "engine": "pcre",
         "minVersion": "10.40",
         "tests": [
             {
@@ -99,7 +95,6 @@
         "description": "Atomic script run (*asr)",
         "pattern": "(*asr:\\w+)",
         "flags": "",
-        "engine": "pcre",
         "minVersion": "10.40",
         "tests": [
             {
@@ -120,7 +115,6 @@
         "description": "Script run preventing spoofing",
         "pattern": "^(*sr:\\w+)$",
         "flags": "",
-        "engine": "pcre",
         "minVersion": "10.40",
         "tests": [
             {
@@ -137,7 +131,7 @@
             },
             {
                 "description": "no match - mixed script rejected",
-                "input": "dοmain",
+                "input": "d\u03bfmain",
                 "matches": []
             }
         ]

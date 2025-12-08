@@ -3,7 +3,6 @@
         "description": "Embedded code basic (??{ code })",
         "pattern": "(\\d+)(?(?{ $^N > 5 })yes|no)",
         "flags": "",
-        "engine": "perl",
         "tests": [
             {
                 "description": "code evaluates to true",
@@ -39,7 +38,6 @@
         "description": "Code assertion (?{ code })",
         "pattern": "(?{ $count++ })\\w+",
         "flags": "",
-        "engine": "perl",
         "tests": [
             {
                 "description": "code executes during match",
@@ -59,7 +57,6 @@
         "description": "Conditional with code",
         "pattern": "(\\d+)(?(?{ $^N % 2 == 0 })even|odd)",
         "flags": "",
-        "engine": "perl",
         "tests": [
             {
                 "description": "even number",
@@ -95,7 +92,6 @@
         "description": "Postponed code (??{ code })",
         "pattern": "(\\w+)(?{ uc($^N) })x",
         "flags": "",
-        "engine": "perl",
         "tests": [
             {
                 "description": "postponed code execution",

@@ -3,7 +3,6 @@
         "description": "Atomic group basic syntax",
         "pattern": "(?>abc)",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "simple match",
@@ -23,7 +22,6 @@
         "description": "Atomic group prevents backtracking",
         "pattern": "(?>a+)a",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "no match - atomic consumes all",
@@ -36,7 +34,6 @@
         "description": "Atomic group vs regular group",
         "pattern": "(?>a+)b",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match when pattern satisfied",
@@ -61,7 +58,6 @@
         "description": "Atomic group with alternation",
         "pattern": "(?>cat|car)pet",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "no match - first alternative taken",
@@ -86,7 +82,6 @@
         "description": "Atomic group in lookahead",
         "pattern": "(?=(?>a+))a*b",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "lookahead doesn't consume",
@@ -106,7 +101,6 @@
         "description": "Nested atomic groups",
         "pattern": "(?>a(?>b+)c)",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "nested atomicity",
@@ -126,7 +120,6 @@
         "description": "Atomic group with quantifier",
         "pattern": "(?>ab)+",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "repeated atomic group",
@@ -146,7 +139,6 @@
         "description": "Atomic group for performance optimization",
         "pattern": "(?>\\.\\d+)",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match decimal part",
@@ -166,7 +158,6 @@
         "description": "Atomic group with character class",
         "pattern": "(?>[a-z]+)\\d",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "match letters then digit",
@@ -186,7 +177,6 @@
         "description": "Atomic group with backreference comparison",
         "pattern": "(?>([a-z])\\1)",
         "flags": "",
-        "engine": "pcre,perl,java",
         "tests": [
             {
                 "description": "doubled letter atomic",

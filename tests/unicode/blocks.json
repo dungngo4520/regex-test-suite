@@ -3,7 +3,6 @@
         "description": "Basic Latin block",
         "pattern": "\\p{InBasicLatin}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "ASCII characters",
@@ -23,16 +22,15 @@
         "description": "Latin-1 Supplement block",
         "pattern": "\\p{InLatin-1Supplement}",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Latin-1 supplement char",
-                "input": "café",
+                "input": "caf\u00e9",
                 "matches": [
                     {
                         "start": 3,
                         "end": 4,
-                        "match": "é",
+                        "match": "\u00e9",
                         "groups": []
                     }
                 ]
@@ -43,16 +41,15 @@
         "description": "Greek and Coptic block",
         "pattern": "\\p{InGreekandCoptic}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Greek letters",
-                "input": "Αλφα",
+                "input": "\u0391\u03bb\u03c6\u03b1",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "Αλφα",
+                        "match": "\u0391\u03bb\u03c6\u03b1",
                         "groups": []
                     }
                 ]
@@ -63,16 +60,15 @@
         "description": "Cyrillic block",
         "pattern": "\\p{InCyrillic}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Cyrillic text",
-                "input": "Привет",
+                "input": "\u041f\u0440\u0438\u0432\u0435\u0442",
                 "matches": [
                     {
                         "start": 0,
                         "end": 6,
-                        "match": "Привет",
+                        "match": "\u041f\u0440\u0438\u0432\u0435\u0442",
                         "groups": []
                     }
                 ]
@@ -83,16 +79,15 @@
         "description": "CJK Unified Ideographs block",
         "pattern": "\\p{InCJKUnifiedIdeographs}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Chinese characters",
-                "input": "你好",
+                "input": "\u4f60\u597d",
                 "matches": [
                     {
                         "start": 0,
                         "end": 2,
-                        "match": "你好",
+                        "match": "\u4f60\u597d",
                         "groups": []
                     }
                 ]
@@ -103,16 +98,15 @@
         "description": "Hiragana block",
         "pattern": "\\p{InHiragana}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Hiragana characters",
-                "input": "ひらがな",
+                "input": "\u3072\u3089\u304c\u306a",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "ひらがな",
+                        "match": "\u3072\u3089\u304c\u306a",
                         "groups": []
                     }
                 ]
@@ -123,16 +117,15 @@
         "description": "Katakana block",
         "pattern": "\\p{InKatakana}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Katakana characters",
-                "input": "カタカナ",
+                "input": "\u30ab\u30bf\u30ab\u30ca",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "カタカナ",
+                        "match": "\u30ab\u30bf\u30ab\u30ca",
                         "groups": []
                     }
                 ]
@@ -143,16 +136,15 @@
         "description": "Arabic block",
         "pattern": "\\p{InArabic}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Arabic text",
-                "input": "مرحبا",
+                "input": "\u0645\u0631\u062d\u0628\u0627",
                 "matches": [
                     {
                         "start": 0,
                         "end": 5,
-                        "match": "مرحبا",
+                        "match": "\u0645\u0631\u062d\u0628\u0627",
                         "groups": []
                     }
                 ]
@@ -163,16 +155,15 @@
         "description": "Hebrew block",
         "pattern": "\\p{InHebrew}+",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "Hebrew text",
-                "input": "שלום",
+                "input": "\u05e9\u05dc\u05d5\u05dd",
                 "matches": [
                     {
                         "start": 0,
                         "end": 4,
-                        "match": "שלום",
+                        "match": "\u05e9\u05dc\u05d5\u05dd",
                         "groups": []
                     }
                 ]
@@ -183,16 +174,15 @@
         "description": "Emoticons block",
         "pattern": "\\p{InEmoticons}",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "emoticon character",
-                "input": "😀",
+                "input": "\ud83d\ude00",
                 "matches": [
                     {
                         "start": 0,
                         "end": 1,
-                        "match": "😀",
+                        "match": "\ud83d\ude00",
                         "groups": []
                     }
                 ]
@@ -203,7 +193,6 @@
         "description": "Combining Diacritical Marks block",
         "pattern": "\\p{InCombiningDiacriticalMarks}",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "combining accent",
@@ -223,16 +212,15 @@
         "description": "Mathematical Operators block",
         "pattern": "\\p{InMathematicalOperators}",
         "flags": "",
-        "engine": "java,icu",
         "tests": [
             {
                 "description": "math symbol",
-                "input": "∑",
+                "input": "\u2211",
                 "matches": [
                     {
                         "start": 0,
                         "end": 1,
-                        "match": "∑",
+                        "match": "\u2211",
                         "groups": []
                     }
                 ]

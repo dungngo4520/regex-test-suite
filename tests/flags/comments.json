@@ -3,7 +3,6 @@
         "description": "Comment (?#...) - inline comment",
         "pattern": "a(?# this is a comment)b",
         "flags": "",
-        "engine": "pcre,perl,python",
         "tests": [
             {
                 "description": "comment ignored",
@@ -36,8 +35,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Comment with special characters",
@@ -56,8 +54,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Extended mode (?x) with line comments",
@@ -76,8 +73,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Extended mode with inline comments",
@@ -96,8 +92,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Comment in character class (literal)",
@@ -116,8 +111,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Nested parentheses in comment",
@@ -136,8 +130,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Empty comment (?#)",
@@ -156,8 +149,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Extended mode with escaped space",
@@ -176,8 +168,7 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     },
     {
         "description": "Extended mode with character class spaces",
@@ -196,7 +187,6 @@
                     }
                 ]
             }
-        ],
-        "engine": "pcre,perl,python"
+        ]
     }
 ]

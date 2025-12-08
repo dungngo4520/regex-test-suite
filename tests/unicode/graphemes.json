@@ -3,7 +3,6 @@
         "description": "Extended grapheme cluster \\X",
         "pattern": "\\X",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "match single ASCII character",
@@ -19,24 +18,24 @@
             },
             {
                 "description": "match base + combining mark",
-                "input": "é",
+                "input": "\u00e9",
                 "matches": [
                     {
                         "start": 0,
                         "end": 2,
-                        "match": "é",
+                        "match": "\u00e9",
                         "groups": []
                     }
                 ]
             },
             {
                 "description": "match emoji with modifier",
-                "input": "👍🏻",
+                "input": "\ud83d\udc4d\ud83c\udffb",
                 "matches": [
                     {
                         "start": 0,
                         "end": 2,
-                        "match": "👍🏻",
+                        "match": "\ud83d\udc4d\ud83c\udffb",
                         "groups": []
                     }
                 ]
@@ -47,28 +46,27 @@
         "description": "Multiple grapheme clusters",
         "pattern": "\\X+",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "match multiple graphemes",
-                "input": "café",
+                "input": "caf\u00e9",
                 "matches": [
                     {
                         "start": 0,
                         "end": 5,
-                        "match": "café",
+                        "match": "caf\u00e9",
                         "groups": []
                     }
                 ]
             },
             {
                 "description": "match emoji sequence",
-                "input": "👨‍👩‍👧‍👦",
+                "input": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66",
                 "matches": [
                     {
                         "start": 0,
                         "end": 7,
-                        "match": "👨‍👩‍👧‍👦",
+                        "match": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66",
                         "groups": []
                     }
                 ]
@@ -79,22 +77,21 @@
         "description": "Grapheme cluster with Korean Hangul",
         "pattern": "\\X",
         "flags": "g",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "match Hangul syllables",
-                "input": "한글",
+                "input": "\ud55c\uae00",
                 "matches": [
                     {
                         "start": 0,
                         "end": 1,
-                        "match": "한",
+                        "match": "\ud55c",
                         "groups": []
                     },
                     {
                         "start": 1,
                         "end": 2,
-                        "match": "글",
+                        "match": "\uae00",
                         "groups": []
                     }
                 ]
@@ -105,16 +102,15 @@
         "description": "Grapheme cluster with ZWJ emoji sequence",
         "pattern": "\\X",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "match family emoji (ZWJ sequence)",
-                "input": "👨‍👩‍👧",
+                "input": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67",
                 "matches": [
                     {
                         "start": 0,
                         "end": 5,
-                        "match": "👨‍👩‍👧",
+                        "match": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67",
                         "groups": []
                     }
                 ]
@@ -125,16 +121,15 @@
         "description": "Grapheme cluster boundary",
         "pattern": "^\\X{3}$",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "exactly 3 grapheme clusters",
-                "input": "café",
+                "input": "caf\u00e9",
                 "matches": [
                     {
                         "start": 0,
                         "end": 5,
-                        "match": "café",
+                        "match": "caf\u00e9",
                         "groups": []
                     }
                 ]
@@ -145,16 +140,15 @@
         "description": "Grapheme with multiple combining marks",
         "pattern": "\\X",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "base + multiple diacritics",
-                "input": "ộ",
+                "input": "\u1ed9",
                 "matches": [
                     {
                         "start": 0,
                         "end": 3,
-                        "match": "ộ",
+                        "match": "\u1ed9",
                         "groups": []
                     }
                 ]
@@ -165,16 +159,15 @@
         "description": "Flag sequence (regional indicators)",
         "pattern": "\\X",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "match flag emoji",
-                "input": "🇺🇸",
+                "input": "\ud83c\uddfa\ud83c\uddf8",
                 "matches": [
                     {
                         "start": 0,
                         "end": 2,
-                        "match": "🇺🇸",
+                        "match": "\ud83c\uddfa\ud83c\uddf8",
                         "groups": []
                     }
                 ]
@@ -185,16 +178,15 @@
         "description": "Emoji with skin tone modifier",
         "pattern": "^\\X$",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "emoji + modifier as one cluster",
-                "input": "👋🏽",
+                "input": "\ud83d\udc4b\ud83c\udffd",
                 "matches": [
                     {
                         "start": 0,
                         "end": 2,
-                        "match": "👋🏽",
+                        "match": "\ud83d\udc4b\ud83c\udffd",
                         "groups": []
                     }
                 ]
@@ -205,16 +197,15 @@
         "description": "Grapheme vs character count",
         "pattern": "^\\X{5}$",
         "flags": "",
-        "engine": "pcre,perl,icu",
         "tests": [
             {
                 "description": "5 graphemes (more code points)",
-                "input": "héllo",
+                "input": "h\u00e9llo",
                 "matches": [
                     {
                         "start": 0,
                         "end": 6,
-                        "match": "héllo",
+                        "match": "h\u00e9llo",
                         "groups": []
                     }
                 ]

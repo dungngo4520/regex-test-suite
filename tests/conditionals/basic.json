@@ -3,7 +3,6 @@
         "description": "Conditional (?(1)yes|no) - if group 1 matched",
         "pattern": "(a)?(?(1)b|c)",
         "flags": "",
-        "engine": "pcre,perl,python",
         "tests": [
             {
                 "description": "group 1 matched - use 'b'",
@@ -44,7 +43,6 @@
         "description": "Conditional (?(<name>)yes|no) - named group",
         "pattern": "(?<test>a)?(?(<test>)b|c)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "named group matched",
@@ -80,7 +78,6 @@
         "description": "Conditional with lookahead assertion",
         "pattern": "(?(?=\\d)\\d+|[a-z]+)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "lookahead succeeds - match digits",
@@ -112,7 +109,6 @@
         "description": "Nested conditionals",
         "pattern": "(a)?(?(1)(b)?(?(2)c|d)|e)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "both groups match",
@@ -165,7 +161,6 @@
         "description": "Conditional without else branch",
         "pattern": "(a)?(?(1)b)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "condition met",
@@ -201,7 +196,6 @@
         "description": "Conditional with lookahead - DEFINE pattern",
         "pattern": "(?(DEFINE)(?<digit>\\d))(?&digit)+",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "use defined subroutine",
@@ -223,7 +217,6 @@
         "description": "Conditional in alternation",
         "pattern": "(?:(a)|(b))(?(1)x|y)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "first alternative with x",

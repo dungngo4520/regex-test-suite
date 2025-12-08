@@ -3,7 +3,6 @@
         "description": "Subroutine call (?1) - numbered group",
         "pattern": "(\\d{3})-(\\d{3})-(?1)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "reuse first group pattern",
@@ -26,7 +25,6 @@
         "description": "Named subroutine (?&name)",
         "pattern": "(?<digit>\\d{3})-(?&digit)-(?&digit)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "call named subroutine multiple times",
@@ -48,7 +46,6 @@
         "description": "Subroutine with DEFINE",
         "pattern": "(?(DEFINE)(?<word>\\w+))(?&word)-(?&word)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "use defined pattern",
@@ -70,7 +67,6 @@
         "description": "Multiple named subroutines",
         "pattern": "(?(DEFINE)(?<letter>[a-z])(?<digit>\\d))(?&letter)+(?&digit)+",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "letters followed by digits",
@@ -93,7 +89,6 @@
         "description": "Subroutine in alternation",
         "pattern": "(\\d+)\\s+((?1)|[a-z]+)",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "subroutine alternative",
@@ -131,7 +126,6 @@
         "description": "Forward reference subroutine",
         "pattern": "(?&future).*(?(DEFINE)(?<future>\\d+))",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "call subroutine defined later",
@@ -153,7 +147,6 @@
         "description": "Subroutine with quantifier",
         "pattern": "(\\w{3})(?:-(?1))+",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "repeated subroutine",
@@ -175,7 +168,6 @@
         "description": "Nested subroutine calls",
         "pattern": "(?<outer>a(?&inner)c)(?(DEFINE)(?<inner>b))",
         "flags": "",
-        "engine": "pcre,perl",
         "tests": [
             {
                 "description": "subroutine calls another",
