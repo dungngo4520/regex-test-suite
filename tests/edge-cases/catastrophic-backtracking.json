@@ -1,0 +1,145 @@
+[
+    {
+        "description": "Simple exponential backtracking pattern",
+        "pattern": "(a+)+b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match with suffix",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - no suffix",
+                "input": "aaa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Nested quantifiers",
+        "pattern": "(a*)*b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match with suffix",
+                "input": "aab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Alternation with overlap",
+        "pattern": "(a|a)*b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "overlapping alternation",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple alternation branches",
+        "pattern": "(a|ab)*b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "overlapping branches",
+                "input": "aab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Character class with quantifier",
+        "pattern": "([a-z]+)*[A-Z]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "repeated class with suffix",
+                "input": "abcA",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "abcA",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Possessive quantifier preventing backtrack",
+        "pattern": "(a++)b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "possessive prevents backtracking",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no suffix causes failure",
+                "input": "aaa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Atomic group preventing backtrack",
+        "pattern": "(?>a+)b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "atomic group prevents backtrack",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

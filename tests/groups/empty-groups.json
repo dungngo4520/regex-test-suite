@@ -1,0 +1,147 @@
+[
+    {
+        "description": "Empty capturing group",
+        "pattern": "()",
+        "flags": "",
+        "tests": [
+            {
+                "description": "empty group matches at position",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple empty groups",
+        "pattern": "()()a()",
+        "flags": "",
+        "tests": [
+            {
+                "description": "multiple empty captures",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Empty alternative",
+        "pattern": "a|",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match first alternative",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match empty alternative",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Empty group with quantifier",
+        "pattern": "()*",
+        "flags": "",
+        "tests": [
+            {
+                "description": "repeated empty group",
+                "input": "",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Empty pattern",
+        "pattern": "",
+        "flags": "",
+        "tests": [
+            {
+                "description": "empty pattern matches at start",
+                "input": "abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Optional empty group",
+        "pattern": "()?",
+        "flags": "",
+        "tests": [
+            {
+                "description": "optional empty group",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Named empty group",
+        "pattern": "(?<empty>)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "named empty group",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,154 @@
+[
+    {
+        "description": "Zero-width positive lookahead",
+        "pattern": "a(?=b)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "lookahead consumes no characters",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Zero-width assertion position",
+        "pattern": "a(?=b)b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "lookahead assertion doesnt consume",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Zero-width negative lookahead",
+        "pattern": "a(?!b)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "negative lookahead zero-width",
+                "input": "ac",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Word boundary zero-width",
+        "pattern": "\\ba",
+        "flags": "",
+        "tests": [
+            {
+                "description": "word boundary is zero-width",
+                "input": " a",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Start anchor zero-width",
+        "pattern": "^a",
+        "flags": "",
+        "tests": [
+            {
+                "description": "start anchor is zero-width",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple zero-width assertions",
+        "pattern": "^(?=a)(?!b)a",
+        "flags": "",
+        "tests": [
+            {
+                "description": "multiple lookaheads",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Zero-width lookbehind positive",
+        "pattern": "(?<=a)b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "lookbehind is zero-width",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Zero-width at end",
+        "pattern": "a$",
+        "flags": "",
+        "tests": [
+            {
+                "description": "end anchor zero-width",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,195 @@
+[
+    {
+        "description": "Backreference to non-existent group",
+        "pattern": "(a)\\2",
+        "flags": "",
+        "tests": [
+            {
+                "description": "non-existent group treated as literal \\2",
+                "input": "aa\\u0032",
+                "matches": []
+            },
+            {
+                "description": "backreference fails when group doesn't exist",
+                "input": "aa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Backreference in first group",
+        "pattern": "(a\\1)?b",
+        "flags": "",
+        "tests": [
+            {
+                "description": "self-referencing group",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple backreferences same group",
+        "pattern": "(.)\\1\\1",
+        "flags": "",
+        "tests": [
+            {
+                "description": "same group referenced multiple times",
+                "input": "aaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aaa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Backreference in alternation",
+        "pattern": "(a)\\1|(b)\\2",
+        "flags": "",
+        "tests": [
+            {
+                "description": "backreference in first alternative",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "backreference in second alternative",
+                "input": "bb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "bb",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Backreference to optional group (unmatched)",
+        "pattern": "(a)?\\1",
+        "flags": "",
+        "tests": [
+            {
+                "description": "optional group didn't match, backreference matches empty",
+                "input": "",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "optional group matched",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Backreference to nested group",
+        "pattern": "((a))\\2",
+        "flags": "",
+        "tests": [
+            {
+                "description": "backreference to outer group",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a",
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Backreference across alternation groups",
+        "pattern": "(a)(b)|(c)\\1",
+        "flags": "",
+        "tests": [
+            {
+                "description": "first alternative matched",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "backreference looks to group 1 from first alt",
+                "input": "caa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Case-insensitive backreference",
+        "pattern": "(a)\\1",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "backreference respects case flag",
+                "input": "aA",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aA",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

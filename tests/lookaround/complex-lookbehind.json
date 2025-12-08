@@ -1,0 +1,174 @@
+[
+    {
+        "description": "Fixed-length positive lookbehind",
+        "pattern": "(?<=abc)def",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match after lookbehind",
+                "input": "abcdef",
+                "matches": [
+                    {
+                        "start": 3,
+                        "end": 6,
+                        "match": "def",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match without lookbehind",
+                "input": "def",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Fixed-length negative lookbehind",
+        "pattern": "(?<!x)y",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match y not after x",
+                "input": "ay",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "y",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match y after x",
+                "input": "xy",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Lookbehind with alternatives",
+        "pattern": "(?<=a|b)c",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match after first alternative",
+                "input": "ac",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "c",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match after second alternative",
+                "input": "bc",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "c",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple lookbehinds",
+        "pattern": "(?<=a)(?<=b)c",
+        "flags": "",
+        "tests": [
+            {
+                "description": "both conditions must be true",
+                "input": "abc",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Lookbehind with word boundary",
+        "pattern": "(?<=\\b)word",
+        "flags": "",
+        "tests": [
+            {
+                "description": "word after boundary",
+                "input": " word",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 5,
+                        "match": "word",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Negative lookbehind at start",
+        "pattern": "(?<!x)^a",
+        "flags": "",
+        "tests": [
+            {
+                "description": "start of string",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Lookbehind with character class",
+        "pattern": "(?<=[a-z])\\d",
+        "flags": "",
+        "tests": [
+            {
+                "description": "digit after lowercase",
+                "input": "a1",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "1",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "digit after non-lowercase",
+                "input": "A1",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Lookbehind with escape sequences",
+        "pattern": "(?<=\\n)\\S",
+        "flags": "",
+        "tests": [
+            {
+                "description": "non-whitespace after newline",
+                "input": "\na",
+                "matches": [
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

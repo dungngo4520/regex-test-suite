@@ -1,0 +1,154 @@
+[
+    {
+        "description": "Case insensitive ASCII",
+        "pattern": "abc",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "lowercase matches uppercase",
+                "input": "ABC",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "ABC",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "mixed case",
+                "input": "AbC",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "AbC",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Case insensitive with character class",
+        "pattern": "[a-z]+",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "class matches uppercase",
+                "input": "ABC",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "ABC",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Case insensitive Unicode letters",
+        "pattern": "café",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "accented lowercase",
+                "input": "CAFÉ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "CAFÉ",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Case insensitive with backreference",
+        "pattern": "(a)\\1",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "case insensitive backreference",
+                "input": "aA",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aA",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Case insensitive negated class",
+        "pattern": "[^A-Z]",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "negated class case insensitive",
+                "input": "1",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "1",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "excluded by case insensitive",
+                "input": "a",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Case insensitive with escape",
+        "pattern": "\\x41",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "hex escape uppercase A",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Case insensitive word boundary",
+        "pattern": "\\bword\\b",
+        "flags": "i",
+        "tests": [
+            {
+                "description": "case insensitive word",
+                "input": "WORD",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "WORD",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

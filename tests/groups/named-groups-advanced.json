@@ -1,0 +1,174 @@
+[
+    {
+        "description": "Named group basic",
+        "pattern": "(?<name>\\w+)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "named group capture",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": [
+                            "hello"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple named groups",
+        "pattern": "(?<first>\\w+) (?<last>\\w+)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "multiple named captures",
+                "input": "john doe",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "match": "john doe",
+                        "groups": [
+                            "john",
+                            "doe"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Named group with numbers",
+        "pattern": "(?<g1>a)(?<g2>b)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "numbers in group names",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Duplicate named groups",
+        "pattern": "(?<x>a)|(?<x>b)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "same name in alternation",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Named group with backreference",
+        "pattern": "(?<x>.)\n(?<y>x)",
+        "flags": "x",
+        "tests": [
+            {
+                "description": "backreference to named group",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a",
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Named group in branch",
+        "pattern": "(?:(?<x>a)|(?<y>b))c",
+        "flags": "",
+        "tests": [
+            {
+                "description": "named groups in alternation",
+                "input": "ac",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ac",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Non-capturing with named group",
+        "pattern": "(?:a)(?<x>b)",
+        "flags": "",
+        "tests": [
+            {
+                "description": "mixed capturing and non-capturing",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "b"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested named groups",
+        "pattern": "(?<outer>a(?<inner>b))",
+        "flags": "",
+        "tests": [
+            {
+                "description": "named groups nested",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "ab",
+                            "b"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

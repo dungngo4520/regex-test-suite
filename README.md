@@ -26,10 +26,6 @@ Annotations used in patterns:
 | `@[control:X]` | Control character (A-Z) |
 | `@[named:name,pattern]` | Named capture group |
 | `@[backref:name]` | Backreference to named group |
-| `@[conditional:cond,yes,no]` | Conditional pattern (if-then-else) |
-| `@[recursive]` | Recursive pattern match |
-| `@[subroutine:name]` | Call to named subroutine |
-| `@[verb:NAME]` | Backtracking control verb (SKIP, FAIL, PRUNE, COMMIT, etc.) |
 | `@[atomic:pattern]` | Atomic group (no backtracking) |
 
 ## Test Format
