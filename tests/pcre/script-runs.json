@@ -1,0 +1,145 @@
+[
+    {
+        "description": "Script run (*sr) - basic",
+        "pattern": "(*sr:\\w+)",
+        "flags": "",
+        "engine": "pcre",
+        "minVersion": "10.40",
+        "tests": [
+            {
+                "description": "single script (Latin)",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - mixed scripts",
+                "input": "helloпривет",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Script run with Cyrillic",
+        "pattern": "(*sr:\\w+)",
+        "flags": "",
+        "engine": "pcre",
+        "minVersion": "10.40",
+        "tests": [
+            {
+                "description": "pure Cyrillic",
+                "input": "привет",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "привет",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Script run with Greek",
+        "pattern": "(*sr:[α-ωΑ-Ω]+)",
+        "flags": "",
+        "engine": "pcre",
+        "minVersion": "10.40",
+        "tests": [
+            {
+                "description": "Greek text",
+                "input": "Αλφα",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Αλφα",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Script run with numbers (Common script)",
+        "pattern": "(*sr:\\w+)",
+        "flags": "",
+        "engine": "pcre",
+        "minVersion": "10.40",
+        "tests": [
+            {
+                "description": "letters and numbers (Common allowed)",
+                "input": "test123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "test123",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic script run (*asr)",
+        "pattern": "(*asr:\\w+)",
+        "flags": "",
+        "engine": "pcre",
+        "minVersion": "10.40",
+        "tests": [
+            {
+                "description": "atomic - no backtracking",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Script run preventing spoofing",
+        "pattern": "^(*sr:\\w+)$",
+        "flags": "",
+        "engine": "pcre",
+        "minVersion": "10.40",
+        "tests": [
+            {
+                "description": "pure script accepted",
+                "input": "domain",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "domain",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - mixed script rejected",
+                "input": "dοmain",
+                "matches": []
+            }
+        ]
+    }
+]

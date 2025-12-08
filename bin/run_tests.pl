@@ -25,8 +25,7 @@ package RegexTestRunner {
         my $self = {
             total_tests => 0,
             passed_tests => 0,
-            failed_tests => 0,
-            skipped_tests => 0
+            failed_tests => 0
         };
         return bless $self, $class;
     }
@@ -248,6 +247,7 @@ package RegexTestRunner {
 
     sub run_test {
         my ($self, $test_case, $test) = @_;
+
         $self->{total_tests}++;
 
         my $pattern_str = $test_case->{pattern};

@@ -1,0 +1,220 @@
+[
+    {
+        "description": "Possessive plus quantifier a++",
+        "pattern": "a++b",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match with trailing b",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - possessive consumes all",
+                "input": "aaa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Possessive star quantifier a*+",
+        "pattern": "a*+b",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match with b",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match b alone",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Possessive question quantifier a?+",
+        "pattern": "a?+b",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match with a",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match without a",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Possessive range quantifier a{2,4}+",
+        "pattern": "a{2,4}+b",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match with trailing b",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - possessive takes max",
+                "input": "aaaa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Possessive vs greedy behavior",
+        "pattern": "\\d++\\d",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "no match - possessive won't backtrack",
+                "input": "123",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Atomic group (?>...) - equivalent to possessive",
+        "pattern": "(?>\\d+)\\d",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "no match - atomic group doesn't backtrack",
+                "input": "123",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Atomic group success case",
+        "pattern": "(?>\\d+)x",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match when pattern continues",
+                "input": "123x",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "123x",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested atomic groups",
+        "pattern": "(?>a(?>b+)c)",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "nested atomic groups",
+                "input": "abbc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "abbc",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic group with alternation",
+        "pattern": "(?>abc|abd)c",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match first alternative",
+                "input": "abcc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "abcc",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - atomic prevents backtrack",
+                "input": "abdc",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Possessive in character class",
+        "pattern": "[a-z]++b",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "no match - possessive takes 'b' too",
+                "input": "aaab",
+                "matches": []
+            }
+        ]
+    }
+]

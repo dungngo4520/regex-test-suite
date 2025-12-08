@@ -1,0 +1,217 @@
+[
+    {
+        "description": "Inline mode modifier (?i) enable",
+        "pattern": "(?i)test",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "case insensitive from modifier",
+                "input": "TEST",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "TEST",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Inline mode modifier (?-i) disable",
+        "pattern": "(?i)te(?-i)st",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "case sensitive after disable",
+                "input": "TEst",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "TEst",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - wrong case",
+                "input": "TEST",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Multiple mode modifiers (?ims)",
+        "pattern": "(?ims)^a.b$",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "all modes active",
+                "input": "A\nB",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "A\nB",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Scoped mode modifier (?i:...)",
+        "pattern": "a(?i:b)c",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "case insensitive only in scope",
+                "input": "aBc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aBc",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - outside scope case matters",
+                "input": "ABC",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Mixed enable/disable (?i-sm)",
+        "pattern": "(?i-sm)test",
+        "flags": "sm",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "enable i, disable s and m",
+                "input": "TEST",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "TEST",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Mode modifier in group (?m:^line$)",
+        "pattern": "(?m:^line$)",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "multiline in scope",
+                "input": "text\nline\nmore",
+                "matches": [
+                    {
+                        "start": 5,
+                        "end": 9,
+                        "match": "line",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Extended mode (?x) - ignore whitespace",
+        "pattern": "(?x) a b c",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "spaces ignored",
+                "input": "abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "abc",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Dotall mode (?s) - dot matches newline",
+        "pattern": "a(?s:.)b",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "dot matches newline in scope",
+                "input": "a\nb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "a\nb",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested mode modifiers",
+        "pattern": "(?i:a(?-i:B)c)",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "nested case sensitivity",
+                "input": "ABc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "ABc",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - inner case wrong",
+                "input": "Abc",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Ungreedy modifier (?U)",
+        "pattern": "(?U)a.*b",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "ungreedy by default",
+                "input": "aXbYb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aXb",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

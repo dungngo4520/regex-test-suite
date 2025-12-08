@@ -1,0 +1,159 @@
+[
+    {
+        "description": "Regional indicator pairs (flags)",
+        "pattern": "[\\x{1F1E6}-\\x{1F1FF}]{2}",
+        "flags": "",
+        "engine": "pcre,perl,python,icu",
+        "tests": [
+            {
+                "description": "US flag",
+                "input": "🇺🇸",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "🇺🇸",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "UK flag",
+                "input": "🇬🇧",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "🇬🇧",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple flag sequences",
+        "pattern": "[\\x{1F1E6}-\\x{1F1FF}]{2}",
+        "flags": "g",
+        "engine": "pcre,perl,python,icu",
+        "tests": [
+            {
+                "description": "multiple flags",
+                "input": "🇺🇸🇬🇧🇯🇵",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "🇺🇸",
+                        "groups": []
+                    },
+                    {
+                        "start": 2,
+                        "end": 4,
+                        "match": "🇬🇧",
+                        "groups": []
+                    },
+                    {
+                        "start": 4,
+                        "end": 6,
+                        "match": "🇯🇵",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Regional indicators with text",
+        "pattern": "[\\x{1F1E6}-\\x{1F1FF}]{2}",
+        "flags": "",
+        "engine": "pcre,perl,python,icu",
+        "tests": [
+            {
+                "description": "flag in text",
+                "input": "Visit 🇫🇷 France",
+                "matches": [
+                    {
+                        "start": 6,
+                        "end": 8,
+                        "match": "🇫🇷",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unpaired regional indicator",
+        "pattern": "[\\x{1F1E6}-\\x{1F1FF}]",
+        "flags": "",
+        "engine": "pcre,perl,python,icu",
+        "tests": [
+            {
+                "description": "single regional indicator",
+                "input": "🇺",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "🇺",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Validate flag sequence length",
+        "pattern": "^[\\x{1F1E6}-\\x{1F1FF}]{2}$",
+        "flags": "",
+        "engine": "pcre,perl,python,icu",
+        "tests": [
+            {
+                "description": "exactly two indicators",
+                "input": "🇨🇦",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "🇨🇦",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - one indicator",
+                "input": "🇨",
+                "matches": []
+            },
+            {
+                "description": "no match - three indicators",
+                "input": "🇨🇦🇺",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Extract country codes from flags",
+        "pattern": "([\\x{1F1E6}-\\x{1F1FF}])([\\x{1F1E6}-\\x{1F1FF}])",
+        "flags": "",
+        "engine": "pcre,perl,python,icu",
+        "tests": [
+            {
+                "description": "capture both indicators",
+                "input": "🇩🇪",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "🇩🇪",
+                        "groups": [
+                            "🇩",
+                            "🇪"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,207 @@
+[
+    {
+        "description": "Atomic group basic syntax",
+        "pattern": "(?>abc)",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "simple match",
+                "input": "abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "abc",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic group prevents backtracking",
+        "pattern": "(?>a+)a",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "no match - atomic consumes all",
+                "input": "aaaa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Atomic group vs regular group",
+        "pattern": "(?>a+)b",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match when pattern satisfied",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - won't give up 'b'",
+                "input": "aaa",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Atomic group with alternation",
+        "pattern": "(?>cat|car)pet",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "no match - first alternative taken",
+                "input": "carpet",
+                "matches": []
+            },
+            {
+                "description": "match different input",
+                "input": "catpet",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "catpet",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic group in lookahead",
+        "pattern": "(?=(?>a+))a*b",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "lookahead doesn't consume",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested atomic groups",
+        "pattern": "(?>a(?>b+)c)",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "nested atomicity",
+                "input": "abbbbc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "abbbbc",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic group with quantifier",
+        "pattern": "(?>ab)+",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "repeated atomic group",
+                "input": "ababab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "ababab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic group for performance optimization",
+        "pattern": "(?>\\.\\d+)",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match decimal part",
+                "input": ".123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": ".123",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic group with character class",
+        "pattern": "(?>[a-z]+)\\d",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "match letters then digit",
+                "input": "abc123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "abc1",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Atomic group with backreference comparison",
+        "pattern": "(?>([a-z])\\1)",
+        "flags": "",
+        "engine": "pcre,perl,java",
+        "tests": [
+            {
+                "description": "doubled letter atomic",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

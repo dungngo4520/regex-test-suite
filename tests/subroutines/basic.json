@@ -1,0 +1,197 @@
+[
+    {
+        "description": "Subroutine call (?1) - numbered group",
+        "pattern": "(\\d{3})-(\\d{3})-(?1)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "reuse first group pattern",
+                "input": "123-456-789",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "123-456-789",
+                        "groups": [
+                            "123",
+                            "456"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Named subroutine (?&name)",
+        "pattern": "(?<digit>\\d{3})-(?&digit)-(?&digit)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "call named subroutine multiple times",
+                "input": "123-456-789",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "123-456-789",
+                        "groups": [
+                            "789"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Subroutine with DEFINE",
+        "pattern": "(?(DEFINE)(?<word>\\w+))(?&word)-(?&word)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "use defined pattern",
+                "input": "hello-world",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "hello-world",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple named subroutines",
+        "pattern": "(?(DEFINE)(?<letter>[a-z])(?<digit>\\d))(?&letter)+(?&digit)+",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "letters followed by digits",
+                "input": "abc123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "abc123",
+                        "groups": [
+                            null,
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Subroutine in alternation",
+        "pattern": "(\\d+)\\s+((?1)|[a-z]+)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "subroutine alternative",
+                "input": "123 456",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "123 456",
+                        "groups": [
+                            "123",
+                            "456"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "literal alternative",
+                "input": "123 abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "123 abc",
+                        "groups": [
+                            "123",
+                            "abc"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Forward reference subroutine",
+        "pattern": "(?&future).*(?(DEFINE)(?<future>\\d+))",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "call subroutine defined later",
+                "input": "123abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "123abc",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Subroutine with quantifier",
+        "pattern": "(\\w{3})(?:-(?1))+",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "repeated subroutine",
+                "input": "abc-def-ghi",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "abc-def-ghi",
+                        "groups": [
+                            "abc"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested subroutine calls",
+        "pattern": "(?<outer>a(?&inner)c)(?(DEFINE)(?<inner>b))",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "subroutine calls another",
+                "input": "abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "abc",
+                        "groups": [
+                            "abc",
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

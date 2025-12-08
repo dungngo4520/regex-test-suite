@@ -1,0 +1,142 @@
+[
+    {
+        "description": "Unicode Age 1.1",
+        "pattern": "\\p{Age=1.1}",
+        "flags": "",
+        "engine": "icu,perl",
+        "tests": [
+            {
+                "description": "character from Unicode 1.1",
+                "input": "A",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "A",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Age 2.0",
+        "pattern": "\\p{Age=2.0}",
+        "flags": "",
+        "engine": "icu,perl",
+        "tests": [
+            {
+                "description": "Euro sign (added in 2.0)",
+                "input": "€",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "€",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Age 3.0",
+        "pattern": "\\p{Age=3.0}",
+        "flags": "",
+        "engine": "icu,perl",
+        "tests": [
+            {
+                "description": "character added in 3.0",
+                "input": "Ꭰ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "Ꭰ",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Age 6.0 emoji",
+        "pattern": "\\p{Age=6.0}",
+        "flags": "",
+        "engine": "icu,perl",
+        "tests": [
+            {
+                "description": "emoji from 6.0",
+                "input": "😀",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "😀",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Age 12.0",
+        "pattern": "\\p{Age=12.0}",
+        "flags": "",
+        "engine": "icu,perl",
+        "tests": [
+            {
+                "description": "character from 12.0",
+                "input": "🧧",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "🧧",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Negated Age property",
+        "pattern": "\\P{Age=1.1}",
+        "flags": "",
+        "engine": "icu,perl",
+        "tests": [
+            {
+                "description": "character not in 1.1",
+                "input": "€",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "€",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Age with range",
+        "pattern": "[\\p{Age=1.1}\\p{Age=2.0}]+",
+        "flags": "",
+        "engine": "icu,perl",
+        "tests": [
+            {
+                "description": "mix of ages",
+                "input": "A€",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "A€",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

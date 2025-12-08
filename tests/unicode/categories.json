@@ -1,0 +1,231 @@
+[
+    {
+        "description": "Unicode Letter property \\p{L} or \\p{Letter}",
+        "pattern": "\\p{L}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Latin letters",
+                "input": "Hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "Hello",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match Greek letters",
+                "input": "Γεια",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Γεια",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Uppercase Letter \\p{Lu}",
+        "pattern": "\\p{Lu}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match uppercase",
+                "input": "HELLO",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "HELLO",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - lowercase",
+                "input": "hello",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Unicode Lowercase Letter \\p{Ll}",
+        "pattern": "\\p{Ll}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match lowercase",
+                "input": "hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Number \\p{N}",
+        "pattern": "\\p{N}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match ASCII digits",
+                "input": "123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "123",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match Arabic-Indic digits",
+                "input": "٠١٢",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "٠١٢",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Punctuation \\p{P}",
+        "pattern": "\\p{P}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match punctuation",
+                "input": "!@#",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "!@#",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Mark \\p{M} - combining marks",
+        "pattern": "\\p{M}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match combining diacritical",
+                "input": "\u0301\u0302",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "\u0301\u0302",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Symbol \\p{S}",
+        "pattern": "\\p{S}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match currency symbols",
+                "input": "$€£",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "$€£",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Separator \\p{Z}",
+        "pattern": "\\p{Z}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match space separators",
+                "input": " \u00A0\u2000",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": " \u00A0\u2000",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Other \\p{C}",
+        "pattern": "\\p{C}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match control characters",
+                "input": "\u0000\u0001",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "\u0000\u0001",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Negated property \\P{L} - non-letters",
+        "pattern": "\\P{L}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match non-letters",
+                "input": "123!@#",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "123!@#",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

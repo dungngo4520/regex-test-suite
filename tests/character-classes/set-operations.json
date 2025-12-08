@@ -1,0 +1,198 @@
+[
+    {
+        "description": "Character class intersection [a-z&&[aeiou]]",
+        "pattern": "[a-z&&[aeiou]]",
+        "flags": "",
+        "engine": "java",
+        "tests": [
+            {
+                "description": "match vowel",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - consonant",
+                "input": "b",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Character class subtraction [a-z--[aeiou]]",
+        "pattern": "[a-z--[aeiou]]",
+        "flags": "",
+        "engine": "ruby",
+        "tests": [
+            {
+                "description": "match consonant",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - vowel",
+                "input": "a",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Nested intersection [[a-z]&&[^aeiou]]",
+        "pattern": "[[a-z]&&[^aeiou]]",
+        "flags": "",
+        "engine": "java",
+        "tests": [
+            {
+                "description": "match consonant via intersection",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple intersections [0-9&&[0-4&&[0-2]]]",
+        "pattern": "[0-9&&[0-4&&[0-2]]]",
+        "flags": "",
+        "engine": "java",
+        "tests": [
+            {
+                "description": "match 0-2 only",
+                "input": "1",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "1",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - outside range",
+                "input": "5",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Symmetric difference [a-z~~[aeiou]]",
+        "pattern": "[a-z~~[aeiou]]",
+        "flags": "",
+        "engine": "ruby",
+        "tests": [
+            {
+                "description": "match consonant",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Character class union (implicit)",
+        "pattern": "[a-z0-9]",
+        "flags": "",
+        "tests": [
+            {
+                "description": "match letter",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match digit",
+                "input": "5",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "5",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Complex set operation [a-z&&[^m-r]&&[^aeiou]]",
+        "pattern": "[a-z&&[^m-r]&&[^aeiou]]",
+        "flags": "",
+        "engine": "java",
+        "tests": [
+            {
+                "description": "match valid consonant",
+                "input": "b",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "b",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - in excluded range",
+                "input": "m",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Unicode class intersection [\\p{L}&&[^\\p{Lu}]]",
+        "pattern": "[\\p{L}&&[^\\p{Lu}]]",
+        "flags": "",
+        "engine": "java",
+        "tests": [
+            {
+                "description": "match lowercase letter",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - uppercase",
+                "input": "A",
+                "matches": []
+            }
+        ]
+    }
+]

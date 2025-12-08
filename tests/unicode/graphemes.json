@@ -1,0 +1,224 @@
+[
+    {
+        "description": "Extended grapheme cluster \\X",
+        "pattern": "\\X",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "match single ASCII character",
+                "input": "a",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "a",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match base + combining mark",
+                "input": "é",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "é",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match emoji with modifier",
+                "input": "👍🏻",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "👍🏻",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple grapheme clusters",
+        "pattern": "\\X+",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "match multiple graphemes",
+                "input": "café",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "café",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "match emoji sequence",
+                "input": "👨‍👩‍👧‍👦",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "👨‍👩‍👧‍👦",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Grapheme cluster with Korean Hangul",
+        "pattern": "\\X",
+        "flags": "g",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "match Hangul syllables",
+                "input": "한글",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "한",
+                        "groups": []
+                    },
+                    {
+                        "start": 1,
+                        "end": 2,
+                        "match": "글",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Grapheme cluster with ZWJ emoji sequence",
+        "pattern": "\\X",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "match family emoji (ZWJ sequence)",
+                "input": "👨‍👩‍👧",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "👨‍👩‍👧",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Grapheme cluster boundary",
+        "pattern": "^\\X{3}$",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "exactly 3 grapheme clusters",
+                "input": "café",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "café",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Grapheme with multiple combining marks",
+        "pattern": "\\X",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "base + multiple diacritics",
+                "input": "ộ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "ộ",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Flag sequence (regional indicators)",
+        "pattern": "\\X",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "match flag emoji",
+                "input": "🇺🇸",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "🇺🇸",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Emoji with skin tone modifier",
+        "pattern": "^\\X$",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "emoji + modifier as one cluster",
+                "input": "👋🏽",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "👋🏽",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Grapheme vs character count",
+        "pattern": "^\\X{5}$",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "5 graphemes (more code points)",
+                "input": "héllo",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "héllo",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

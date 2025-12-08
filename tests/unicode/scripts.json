@@ -1,0 +1,242 @@
+[
+    {
+        "description": "Unicode Script - Latin \\p{Latin}",
+        "pattern": "\\p{Latin}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Latin script",
+                "input": "Hello",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "Hello",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Greek \\p{Greek}",
+        "pattern": "\\p{Greek}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Greek script",
+                "input": "Γεια",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Γεια",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Cyrillic \\p{Cyrillic}",
+        "pattern": "\\p{Cyrillic}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Cyrillic script",
+                "input": "Привет",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "Привет",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Han (Chinese) \\p{Han}",
+        "pattern": "\\p{Han}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Han characters",
+                "input": "你好",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "你好",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Hiragana \\p{Hiragana}",
+        "pattern": "\\p{Hiragana}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Hiragana",
+                "input": "こんにちは",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "こんにちは",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Katakana \\p{Katakana}",
+        "pattern": "\\p{Katakana}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Katakana",
+                "input": "カタカナ",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "カタカナ",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Arabic \\p{Arabic}",
+        "pattern": "\\p{Arabic}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Arabic script",
+                "input": "مرحبا",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "مرحبا",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Hebrew \\p{Hebrew}",
+        "pattern": "\\p{Hebrew}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Hebrew script",
+                "input": "שלום",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "שלום",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Devanagari \\p{Devanagari}",
+        "pattern": "\\p{Devanagari}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Devanagari",
+                "input": "नमस्ते",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "नमस्ते",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Unicode Script - Thai \\p{Thai}",
+        "pattern": "\\p{Thai}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match Thai script",
+                "input": "สวัสดี",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "สวัสดี",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Negated Script \\P{Latin} - non-Latin",
+        "pattern": "\\P{Latin}+",
+        "flags": "",
+        "engine": "pcre,perl,python,java,icu",
+        "tests": [
+            {
+                "description": "match non-Latin",
+                "input": "你好123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "你好123",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Script Extensions \\p{Scx=...}",
+        "pattern": "\\p{Scx=Greek}+",
+        "flags": "",
+        "engine": "pcre,perl,icu",
+        "tests": [
+            {
+                "description": "match Greek script extensions",
+                "input": "Γεια",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "Γεια",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

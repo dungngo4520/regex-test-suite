@@ -1,0 +1,83 @@
+[
+    {
+        "description": "Callout with number (?C0)",
+        "pattern": "a(?C1)b",
+        "flags": "",
+        "engine": "pcre",
+        "tests": [
+            {
+                "description": "callout during match",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Callout with string (?C'name')",
+        "pattern": "a(?C'test')b",
+        "flags": "",
+        "engine": "pcre",
+        "minVersion": "10.20",
+        "tests": [
+            {
+                "description": "named callout",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Multiple callouts",
+        "pattern": "(?C1)a(?C2)b(?C3)",
+        "flags": "",
+        "engine": "pcre",
+        "tests": [
+            {
+                "description": "multiple callout points",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Auto callout (?C)",
+        "pattern": "a(?C)b",
+        "flags": "",
+        "engine": "pcre",
+        "tests": [
+            {
+                "description": "auto callout (uses next available number)",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]

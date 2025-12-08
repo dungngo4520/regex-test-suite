@@ -1,0 +1,260 @@
+[
+    {
+        "description": "Conditional (?(1)yes|no) - if group 1 matched",
+        "pattern": "(a)?(?(1)b|c)",
+        "flags": "",
+        "engine": "pcre,perl,python",
+        "tests": [
+            {
+                "description": "group 1 matched - use 'b'",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "group 1 not matched - use 'c'",
+                "input": "c",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "c",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "no match - wrong alternative",
+                "input": "ac",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Conditional (?(<name>)yes|no) - named group",
+        "pattern": "(?<test>a)?(?(<test>)b|c)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "named group matched",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "named group not matched",
+                "input": "c",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "c",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Conditional with lookahead assertion",
+        "pattern": "(?(?=\\d)\\d+|[a-z]+)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "lookahead succeeds - match digits",
+                "input": "123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "123",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "lookahead fails - match letters",
+                "input": "abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "abc",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested conditionals",
+        "pattern": "(a)?(?(1)(b)?(?(2)c|d)|e)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "both groups match",
+                "input": "abc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "abc",
+                        "groups": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "only first group matches",
+                "input": "ad",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ad",
+                        "groups": [
+                            "a",
+                            null
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "no groups match",
+                "input": "e",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 1,
+                        "match": "e",
+                        "groups": [
+                            null,
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Conditional without else branch",
+        "pattern": "(a)?(?(1)b)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "condition met",
+                "input": "ab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ab",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "condition not met - match empty",
+                "input": "",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 0,
+                        "match": "",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Conditional with lookahead - DEFINE pattern",
+        "pattern": "(?(DEFINE)(?<digit>\\d))(?&digit)+",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "use defined subroutine",
+                "input": "123",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "123",
+                        "groups": [
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Conditional in alternation",
+        "pattern": "(?:(a)|(b))(?(1)x|y)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "first alternative with x",
+                "input": "ax",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "ax",
+                        "groups": [
+                            "a",
+                            null
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "second alternative with y",
+                "input": "by",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "by",
+                        "groups": [
+                            null,
+                            "b"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

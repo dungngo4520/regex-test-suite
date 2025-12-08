@@ -1,6 +1,5 @@
 [
     {
-        "description": "^ matches line start with multiline",
         "description": "Line anchors ^ and $",
         "pattern": "^world$",
         "flags": "m",

@@ -1,6 +1,5 @@
 [
     {
-        "description": "String boundary ^ and $ with multiline",
         "description": "^ vs \\A in multiline",
         "pattern": "^hello",
         "flags": "m",

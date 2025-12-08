@@ -1,0 +1,210 @@
+[
+    {
+        "description": "Branch reset (?|...) - resets group numbers",
+        "pattern": "(?|(a)|(b)|(c))\\1",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "first alternative with backreference",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "second alternative with backreference",
+                "input": "bb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "bb",
+                        "groups": [
+                            "b"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "third alternative with backreference",
+                "input": "cc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "cc",
+                        "groups": [
+                            "c"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Branch reset with different group counts",
+        "pattern": "(?|(a)(b)|(c))\\1",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "two groups with backreference",
+                "input": "aba",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 3,
+                        "match": "aba",
+                        "groups": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "one group with backreference",
+                "input": "cc",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "cc",
+                        "groups": [
+                            "c",
+                            null
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Nested branch reset",
+        "pattern": "(?|(?|(a)|(b))|(c))\\1",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "nested first alternative",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Branch reset with named groups",
+        "pattern": "(?|(?<name>a)|(?<name>b))\\k<name>",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "first alternative",
+                "input": "aa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "aa",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "second alternative",
+                "input": "bb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 2,
+                        "match": "bb",
+                        "groups": [
+                            "b"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Branch reset for date parsing",
+        "pattern": "(?|(\\d{4})-(\\d{2})-(\\d{2})|(\\d{2})/(\\d{2})/(\\d{4}))",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "ISO format",
+                "input": "2023-12-25",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 10,
+                        "match": "2023-12-25",
+                        "groups": [
+                            "2023",
+                            "12",
+                            "25"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "US format",
+                "input": "12/25/2023",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 10,
+                        "match": "12/25/2023",
+                        "groups": [
+                            "12",
+                            "25",
+                            "2023"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Branch reset with quantifiers",
+        "pattern": "(?|(a+)|(b+))\\1",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "repeated a's",
+                "input": "aaaaaa",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "aaaaaa",
+                        "groups": [
+                            "aaa"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

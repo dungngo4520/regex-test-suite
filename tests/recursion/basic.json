@@ -1,0 +1,224 @@
+[
+    {
+        "description": "Simple recursion (?R) - balanced parentheses",
+        "pattern": "\\((?:[^()]|(?R))*\\)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "single level",
+                "input": "(abc)",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 5,
+                        "match": "(abc)",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "nested parentheses",
+                "input": "(a(b)c)",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "(a(b)c)",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "deeply nested",
+                "input": "(a(b(c)d)e)",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 11,
+                        "match": "(a(b(c)d)e)",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "no match - unbalanced",
+                "input": "(abc",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Recursion with numbered call (?1)",
+        "pattern": "(\\((?:[^()]|(?1))*\\))",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "match nested structure",
+                "input": "(a(b)c)",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "(a(b)c)",
+                        "groups": [
+                            "(a(b)c)"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Recursion for palindromes",
+        "pattern": "^(?:(.)(?:(?1)|.?))\\1$",
+        "flags": "",
+        "engine": "pcre",
+        "tests": [
+            {
+                "description": "even length palindrome",
+                "input": "abba",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "abba",
+                        "groups": [
+                            "a"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "odd length palindrome",
+                "input": "racecar",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "racecar",
+                        "groups": [
+                            "r"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "no match - not palindrome",
+                "input": "hello",
+                "matches": []
+            }
+        ]
+    },
+    {
+        "description": "Balanced braces with multiple types",
+        "pattern": "\\{(?:[^{}]|(?R))*\\}|\\[(?:[^\\[\\]]|(?R))*\\]",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "curly braces",
+                "input": "{a{b}c}",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "{a{b}c}",
+                        "groups": []
+                    }
+                ]
+            },
+            {
+                "description": "square brackets",
+                "input": "[a[b]c]",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 7,
+                        "match": "[a[b]c]",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Recursion with capture groups",
+        "pattern": "^(a(?1)?b)$",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "nested a...b",
+                "input": "aabb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aabb",
+                        "groups": [
+                            "aabb"
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "deeply nested",
+                "input": "aaabbb",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 6,
+                        "match": "aaabbb",
+                        "groups": [
+                            "aaabbb"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Named recursion (?&name)",
+        "pattern": "(?<balanced>\\((?:[^()]|(?&balanced))*\\))",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "recursive named pattern",
+                "input": "(a(b(c)))",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 9,
+                        "match": "(a(b(c)))",
+                        "groups": [
+                            "(a(b(c)))"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description": "Recursion depth limit",
+        "pattern": "a(?:(?R)|b)",
+        "flags": "",
+        "engine": "pcre,perl",
+        "tests": [
+            {
+                "description": "moderate nesting",
+                "input": "aaab",
+                "matches": [
+                    {
+                        "start": 0,
+                        "end": 4,
+                        "match": "aaab",
+                        "groups": []
+                    }
+                ]
+            }
+        ]
+    }
+]
